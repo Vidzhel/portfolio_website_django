@@ -21,12 +21,8 @@
                             {% csrf_token %}
                             <h3>Send me a message</h3>
                             {{ form.as_p }}
-                            {% comment %} <input type="text" required name="sender_name" placeholder="Your Name" id="sender_name">
-                            <input type="text" required name="sender_name" placeholder="Your Email" id="sender_email">
-                            <input type="text" required name="sender_name" placeholder="Subject" id="subject">
-                            <textarea required name="sender_name" rows="10" placeholder="Your Message"
-                                id="sender_message"></textarea> {% endcomment %}
                             <div class="button" id="submit_form"><a>Send</a></div>
+                            <div id="success"></div>
                         </form>
 
                         <div class="contact_info">

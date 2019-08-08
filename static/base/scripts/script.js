@@ -59,31 +59,51 @@ window.onload = function () {
         var token = form_to_submit.querySelector("[name='csrfmiddlewaretoken']");
 
         button.onclick = function () {
-            form_to_submit.submit();
-            // $.ajax({
-            //     url: "", // the endpoint
-            //     type: "POST", // http method
-            //     data: {
-            //         csrfmiddlewaretoken: token.getAttribute("value"),
-            //         sender_name: "Oleg",
-            //         sender_email: $('#sender_email').val(),
-            //         subject: $('#subject').val(),
-            //         sender_message: $('#sender_message').val(),
-            //     }, // data sent with the post request
+            // form_to_submit.submit();
+            $.ajax({
+                url: "", // the endpoint
+                type: "POST", // http method
+                data: {
+                    csrfmiddlewaretoken: token.getAttribute("value"),
+                    sender_name: $('#sender_name').val(),
+                    sender_email: $('#sender_email').val(),
+                    subject: $('#subject').val(),
+                    sender_message: $('#sender_message').val(),
+                }, // data sent with the post request
 
-            //     // handle a successful response
-            //     success: function (json) {
-            //         // $('#post-text').val(''); // remove the value from the input
-            //         console.log(json); // log the returned json to the console
-            //     },
+                // handle a successful response
+                success: function (json) {
 
-            //     // handle a non-successful response
-            //     error: function (xhr, errmsg, err) {
-            //         $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: " + errmsg +
-            //             " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
-            //         console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-            //     }
-            // });
+                    for (var item in json) {
+
+                        if (item === "success") {
+                            var label = document.getElementById("success");
+                            label.innerText = json[item];
+                            var error;
+                            while (error = document.querySelector(".error"))
+                                error.parentNode.removeChild(error);
+                        } else
+                            // If there is not errors
+                            if (document.getElementById(item).nextSibling === null || !document.getElementById(item).nextSibling.classList.contains("error")) {
+                                // Create element with text error and place it near appropriate input
+                                var error = document.createElement("p");
+                                error.classList.add("error");
+                                error.innerText = json[item]
+                                document.getElementById(item).parentNode.insertBefore(error, document.getElementById(item).nextSibling);
+                            }
+
+
+                    }
+                },
+
+                // handle a non-successful response
+                error: function (xhr, errmsg, err) {
+                    console.log(xhr.responseText)
+                    console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+                    console.log(errors)
+
+                }
+            });
         };
     }
 

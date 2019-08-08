@@ -10,20 +10,21 @@
     <!-- Controls layout for wep pages on mobile browsers -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+
+    <!-- Fav icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'base/images/Logo.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'base/images/Logo.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'base/images/Logo.png' %}">
+    <link rel="shortcut icon" href="{% static 'base/images/Logo.png' %}">
+    <meta name="robots" content="index,follow">
+
+    <link rel="manifest" href="">
+{% block meta %}
     <!-- Main meta tags -->
     <meta name="description" content="description of entire page. 90 characters">
     <!-- Tell google that is the main page with content that may be duplicated on page provided with href -->
     <link rel="canonical" href="page with similar content">
-    <meta name="robots" content="index,follow">
     <title>Oleg Talaver</title>
-
-    <!-- Fav icons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="">
-    <link rel="icon" type="image/png" sizes="32x32" href="">
-    <link rel="icon" type="image/png" sizes="32x32" href="">
-    <link rel="shortcut icon" href="">
-
-    <link rel="manifest" href="">
 
     <!-- Open Graph meta tags for stilized links -->
     <meta property="og:type" content="website">
@@ -38,6 +39,7 @@
     <meta name="twitter:image" content="LINK TO THE IMAGE FILE">
     <meta name="twitter:site" content="@USERNAME">
     <meta name="twitter:creator" content="@USERNAME">
+{% endblock meta %}
 
     <!-- Mobile browser theme color -->
     <!-- Chrome, Firefox, Opera -->
