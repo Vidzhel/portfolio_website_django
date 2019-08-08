@@ -1,0 +1,129 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Controls layout for wep pages on mobile browsers -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Main meta tags -->
+    <meta name="description" content="description of entire page. 90 characters">
+    <!-- Tell google that is the main page with content that may be duplicated on page provided with href -->
+    <link rel="canonical" href="page with similar content">
+    <meta name="robots" content="index,follow">
+    <title>Oleg Talaver</title>
+
+    <!-- Fav icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="">
+    <link rel="icon" type="image/png" sizes="32x32" href="">
+    <link rel="icon" type="image/png" sizes="32x32" href="">
+    <link rel="shortcut icon" href="">
+
+    <link rel="manifest" href="">
+
+    <!-- Open Graph meta tags for stilized links -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="TITLE OF YOUR POST OR PAGE">
+    <meta property="og:description" content="DESCRIPTION OF YOUR PAGE CONTENT">
+    <meta property="og:image" content="LINK TO THE IMAGE FILE">
+    <meta property="og:url" content="PERMALINK">
+    <meta property="og:site_name" content="SITE NAME">
+    <!-- Twitter cards -->
+    <meta name="twitter:title" content="TITLE OF YOUR POST OR PAGE">
+    <meta name="twitter:description" content="DESCRIPTION OF YOUR PAGE CONTENT">
+    <meta name="twitter:image" content="LINK TO THE IMAGE FILE">
+    <meta name="twitter:site" content="@USERNAME">
+    <meta name="twitter:creator" content="@USERNAME">
+
+    <!-- Mobile browser theme color -->
+    <!-- Chrome, Firefox, Opera -->
+    <meta name="theme-color" content="#000">
+    <!-- Windows Phone -->
+    <meta name="msapplication-TileColor" content="#000">
+    <meta name="msapplication-navbutton-color" content="#000">
+    <!-- IOS Safari -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucen">
+
+    <!-- Preloader -->
+    <link rel="stylesheet" href="{% static 'base/styles/css/preloader.min.css' %}">
+
+    <!-- Styles for preloading screen -->
+    <style>
+        .preloader {
+            opacity: 0;
+            transition: opacity .2s ease-in-out;
+        }
+
+        body {
+            opacity: 0;
+            overflow-x: hidden;
+        }
+
+        html {
+            background-color: #282C2F;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="preloader">
+        <svg height="100" width="100">
+            <circle cx="50" cy="50" r="40" class="loader" />
+        </svg>
+    </div>
+
+
+    {% block content %}
+        {% comment %} Content goes here {% endcomment %}
+    {% endblock content %}
+
+
+    <footer>
+        <div class="top_line">
+            <div class="outher_container">
+                <a href="">
+                    <div class="logo">
+
+                        <img class="lazyload"
+                            src="data:image/gif;base64,R0lGODlhCgAIAIABAN3d3f///yH5BAEAAAEALAAAAAAKAAgAAAINjAOnyJv2oJOrVXrzKQA7"
+                            data-src="./media/img/main_page/Logo.png" alt="vidzhel_logo">
+                        <span class="logo_text">Vidzhel</span>
+
+                    </div>
+                </a>
+                <div class="social_media">
+                    <a target="_blank" href="https://github.com/Vidzhel" class="hoverable"><i
+                            class="fab fa-github-square fa-lg"></i></a>
+                    <a target="_blank" href="https://www.linkedin.com/in/vidzhel/" class="hoverable"><i
+                            class="fab fa-linkedin fa-lg"></i></a>
+                    <a target="_blank" href="https://www.pinterest.com/Vidzhel" class="hoverable"><i
+                            class="fab fa-pinterest-square fa-lg"></i></a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+
+    <!-- Lazyload -->
+    <script src="{% static 'base/scripts/lazyload.min.js' %}"></script>
+    <script>
+        lazyload();
+    </script>
+
+    {% block styles %}
+    {% comment %} Custom styles goes here {% endcomment %}
+    {% endblock styles %}
+
+    <link rel="stylesheet" href="{% static 'base/styles/css/font_awesome.min.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="{% static 'base/scripts/script.js' %}"></script>
+    <script src="{% static 'base/scripts/parallax.min.js' %}"></script>
+</body>
+
+</html>

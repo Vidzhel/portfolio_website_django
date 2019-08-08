@@ -1,0 +1,57 @@
+.preloader.preloader 
+    position: fixed
+    height: 100%
+    width: 100%
+    display: flex
+    justify-content: center
+    align-items: center
+    background-color: #282C2F
+    z-index: 999
+    opacity: 1 
+    transition: opacity .2s ease-in-out, visibility .2s ease-in-out
+
+
+.preloader svg 
+    display: flex
+    justify-content: center
+    animation: 1s spin infinite ease-in-out
+    align-items: center
+
+
+
+.loader 
+    fill: transparent
+    stroke: #E22A50
+    stroke-width: 5
+    stroke-dasharray: 250
+    stroke-dashoffset: 1000
+    animation: rotate 5s ease-in-out infinite
+
+
+.loader::after 
+    content: ""
+    height: 80px
+    width: 80px
+    border-top-color: #E22A50
+
+
+.preloader.done 
+    opacity: 0
+    visibility: hidden
+
+
+@keyframes rotate 
+    to 
+        stroke-dashoffset: 0
+    
+
+
+@keyframes spin 
+    from 
+        transform: rotate(0deg)
+    
+
+    to 
+        transform: rotate(360deg)
+    
+

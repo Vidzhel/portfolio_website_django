@@ -1,0 +1,334 @@
+@import "./common_styles"
+
+
+header
+    height: 100vh
+
+// Common
+
+.section_button
+    display: flex
+    justify-content: center
+    margin-top: 50px
+
+// Header
+header
+    background: url("../../media/img/main_page/portfolio_header.png") no-repeat center center / cover
+
+    .outher_container
+        position: relative
+        height: 100%
+
+    .header_content
+        position: absolute
+        right: 0
+        top: 35%
+
+        h1
+            font-family: $lato
+            color: $accentColor
+            font-weight: 800
+            font-size: 75px
+            line-height: 1
+            margin: 0 0 0 -5px
+
+        p
+            font-weight: 300
+            font-family: $lato
+            letter-spacing: 9px
+            font-size: 18px
+
+    .social_media
+        position: absolute
+        top: 40%
+        
+        a
+            display: block
+            margin-bottom: 10px
+
+    .scroll
+        display: flex
+        justify-content: center
+        align-items: center
+        position: absolute
+        text-transform: uppercase
+        right: 0
+        bottom: 20px
+        cursor: pointer
+
+        span
+            font-size: 12px
+            line-height: 1
+            margin-left: 10px
+
+        i 
+            color: $accentColor
+            transition: transform .2s ease-in-out
+
+        &:hover
+
+            i
+                transform: translate3d(0, 10px, 0)
+
+// Skills
+
+.skills
+	user-select: none
+	opacity: 1
+	display: flex
+	justify-content: space-around
+	flex-wrap: wrap
+
+	.skills_item
+		margin-top: 30px
+		width: 300px
+		border-radius: 10px
+		padding: 18px 40px
+		background-color: white
+		color: #000
+
+		h3
+			font-size: 30px
+			text-align: center
+			font-weight: 300
+			margin: 0
+			letter-spacing: 3px
+
+		p
+			color: $accentColor
+            
+// About
+
+.about
+	display: flex
+	flex-wrap: wrap
+	align-items: stretch
+	justify-content: space-between
+
+	.img
+		min-height: 300px
+		min-width: 200px
+		max-height: 400px
+		flex: 1
+		background-color: #fff
+
+	.text
+		font-family: $lato
+		font-size: 15px
+		margin-left: 80px
+		flex: 2
+
+		p
+			color: #8A8A8A
+
+		p:first-child
+			margin-top: 0
+			color: #D7D7D7
+
+		.button_wrapper
+			margin-top: 20px
+			display: flex
+			justify-content: center
+	
+// Get in touch
+	
+.contact_me
+	background-color: rgba(0,0,0,0.4)
+	display: flex
+
+	h3, p
+		font-weight: 300
+		letter-spacing: 3px
+		color: $accentColor
+		text-transform: uppercase
+		font-size: 13px
+		margin-bottom: 30px
+
+	p
+		margin-bottom: 10px
+		text-transform: capitalize
+		letter-spacing: 0 
+
+	ul
+		padding: 0
+		margin: 0
+
+		li
+			list-style: none
+			font-size: 12px
+			color: #8A8A8A
+
+
+	form
+		padding: 50px
+		flex: 2
+
+		input, textarea
+			caret-color: $accentColor
+			font-family: $default-font
+			display: block
+			background-color: transparent
+			border-width: 0
+			border-bottom: 3px solid #707070
+			padding: 12px 0
+			width: 100%
+			margin-top: 10px
+			color: white
+
+			&:focus
+				outline: none
+				border-bottom: 3px solid $accentColor
+
+			
+
+		.button
+			width: 100%
+			text-align: center
+			margin-top: 35px
+			padding-left: 0
+			padding-right: 0
+
+			a
+				display: block
+				box-sizing: border-box
+				width: 100%
+	
+	.contact_info
+		padding: 50px
+		flex: 1
+		background-color: rgba(0,0,0,0.4)
+
+
+
+@media screen and (max-width: 1024px)
+
+	header
+		height: auto
+		position: relative
+
+		.header_content
+			margin-top: 10vh
+			right: 40px
+			position: static
+			text-align: center
+			margin-bottom: 80px
+			.button
+				margin-top: 20px
+
+		.social_media
+			position: static
+			padding: 25% 35% 0 35%
+			display: flex
+			justify-content: space-around !important
+
+			// a
+				// margin-right: 10px
+
+		.scroll
+			// right: 50%
+			left: 0
+			margin: 0 auto
+			transform: translate(0, 50%)
+
+		.outher_container.outher_container
+			position: static
+
+		
+
+	.contact_me
+		flex-direction: column
+
+@media screen and (max-width: 770px) 
+
+	header
+
+		.header_content.header_content
+			margin-top: 20%
+
+			h1
+				font-size: 60px
+
+			p
+				font-size: 15px
+
+	.section
+		
+		.heading.heading
+
+			h2
+				font-size: 30px
+
+@media screen and (max-width: 550px)
+
+	header
+
+		.header_content.header_content
+			
+
+			h1
+				text-align: left
+				font-size: 60px
+
+			p
+				font-size: 15px
+				text-align: left
+
+			.button
+				margin: 20px 20px
+				display: block
+
+			.button:first-child
+				margin-top: 30px
+
+				
+		.social_media.social_media
+			padding: 35% 0 0 0
+
+			a
+				margin-right: 10px
+
+	.about
+		flex-direction: column
+		align-items: center
+
+		.text
+			margin: 30px 0 0 0
+
+@media screen and (max-width: 320px)
+	
+	header
+
+		.social_media.social_media
+			padding-top: 100px
+
+		.header_content.header_content.header_content
+			margin-top: 30px
+			margin-bottom: 50px
+
+		h1
+			font-size: 40px
+
+		p
+			line-height: 1.2
+			font-size: 10px
+			letter-spacing: 0px
+
+			
+		.button
+			margin: 20px 0 20px 0
+			display: block
+
+		.button.button:last-child
+			margin: 20px 20px 0 20px
+
+		.button:first-child
+			margin: 30px 0
+
+	.button
+		font-size: 13px
+
+@media screen and (min-width: 1024px) and (max-width: 1300px) 
+	// sdf
+
+
+
