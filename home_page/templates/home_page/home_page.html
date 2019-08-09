@@ -1,0 +1,318 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% comment %} {% block meta %}
+{% endblock meta %} {% endcomment %}
+
+{% block content %}
+    <header>
+        <div class="outher_container">
+            <div class="fixed_nav">
+                <div class="anim_inner outher_container">
+                    <a href="{% url 'home_page' %}">
+
+                        <div class="logo">
+
+                            <img class="lazyload"
+                                src="data:image/gif;base64,R0lGODlhCgAIAIABAN3d3f///yH5BAEAAAEALAAAAAAKAAgAAAINjAOnyJv2oJOrVXrzKQA7"
+                                data-src="{% static 'base/images/Logo.png' %}" alt="vidzhel_logo">
+                            <span class="logo_text">Vidzhel</span>
+
+                        </div>
+                    </a>
+                    <nav class="main_nav">
+                        <ul class="list_container">
+                            <li id="menu" class="menu_icon"><i class="fas fa-bars fa-lg"></i></li>
+                            <div class="list">
+                                <ul>
+                                    <li class="active"><a href="index.html">HOME</a></li>
+                                    <li><a href="/pages/portfolio.html">PORTFOLIO</a></li>
+                                    <li><a href="/pages/about.html">ABOUT</a></li>
+                                    <li><a class="smooth_scroll" data-anchor="get_in_touch"
+                                            data-duration="2000">CONTACT</a></li>
+                                </ul>
+                            </div>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="social_media">
+                <a target="_blank" href="https://github.com/Vidzhel" class="hoverable"><i
+                        class="fab fa-github-square fa-lg"></i></a>
+                <a target="_blank" href="https://www.linkedin.com/in/vidzhel/" class="hoverable"><i
+                        class="fab fa-linkedin fa-lg"></i></a>
+                <a target="_blank" href="https://www.pinterest.com/Vidzhel" class="hoverable"><i
+                        class="fab fa-pinterest-square fa-lg"></i></a>
+            </div>
+
+            <div class="header_content">
+
+                <h1>HELLO, I'M OLEG</h1>
+                <p>A Creative Developer From Ukraine</p>
+                <div class="button"><a href="./pages/portfolio.html">See my works</a></div>
+                <div class="button"><a data-duration="2000" class="smooth_scroll" data-anchor="get_in_touch">GEt in
+                        touch</a></div>
+                <div class="button"><a href="#">Download CV</a></div>
+
+
+            </div>
+
+            <div class="scroll smooth_scroll" data-anchor="scroll_down" data-duration="1000">
+                <i class="fas fa-chevron-down fa-lg"></i>
+                <span>Scroll down</span>
+            </div>
+        </div>
+    </header>
+
+    <section id="scroll_down" class="section">
+
+        <div class="container">
+            <div class="section_heading">
+                <h1>Recent works</h1>
+                <h2>I love what i do, check out some of my latest works</h2>
+            </div>
+            <div class="content">
+                <div class="projects">
+                    <div class="project_item in_progress">
+                        <div class="read_more">
+                            <div class="button"><a href="./pages/portfolio_item.html">Read more</a></div>
+                        </div>
+                        <img class="lazyload"
+                            src="data:image/gif;base64,R0lGODlhCgAIAIABAN3d3f///yH5BAEAAAEALAAAAAAKAAgAAAINjAOnyJv2oJOrVXrzKQA7"
+                            data-src="/media/img/main_page/Image 5.jpg" alt="project_image">
+                        <div class="project_item_content">
+                            <div class="title">Desktop Manager</div>
+                            <div class="summary">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eveniet
+                                vitae
+                                totam ut harum quidem nisi mollitia vel veritatis provident nam,.</div>
+                            <div class="bottom_line">
+                                <div class="left">
+                                    <div class="project_tags">
+                                        <div class="tag"><a href="#">c</a></div>
+                                        <div class="tag"><a href="#">gui/ux</a></div>
+                                    </div>
+                                </div>
+                                <div class="right">
+                                    <a href="#" class="hoverable"><i class="fab fa-github-square fa-lg"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project_item">
+                        <div class="read_more">
+                            <div class="button"><a href="#">Read more</a></div>
+                        </div>
+                        <img class="lazyload"
+                            src="data:image/gif;base64,R0lGODlhCgAIAIABAN3d3f///yH5BAEAAAEALAAAAAAKAAgAAAINjAOnyJv2oJOrVXrzKQA7"
+                            data-src="/media/img/main_page/Image 5.jpg" alt="project_image">
+                        <div class="project_item_content">
+                            <div class="title">Desktop Manager</div>
+                            <div class="summary">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eveniet
+                                vitae
+                                totam ut harum quidem nisi mollitia vel veritatis provident nam,.</div>
+                            <div class="bottom_line">
+                                <div class="left">
+                                    <div class="project_tags">
+                                        <div class="tag"><a href="#">c</a></div>
+                                        <div class="tag"><a href="#">gui/ux</a></div>
+                                    </div>
+                                </div>
+                                <div class="right">
+                                    <a href="#" class="hoverable"><i class="fab fa-github-square fa-lg"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project_item">
+                        <div class="read_more">
+                            <div class="button"><a href="#">Read more</a></div>
+                        </div>
+                        <img class="lazyload"
+                            src="data:image/gif;base64,R0lGODlhCgAIAIABAN3d3f///yH5BAEAAAEALAAAAAAKAAgAAAINjAOnyJv2oJOrVXrzKQA7"
+                            data-src="/media/img/main_page/placeholder.jfif" alt="project_image">
+                        <div class="project_item_content">
+                            <div class="title">Desktop Manager</div>
+                            <div class="summary">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eveniet
+                                vitae. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eveniet
+                                vitae
+                                totam ut harum quidem nisi mollitia vel veritatis provident nam,.</div>
+                            <div class="bottom_line">
+                                <div class="left">
+                                    <div class="project_tags">
+                                        <div class="tag"><a href="#">c</a></div>
+                                        <div class="tag"><a href="#">gui/ux</a></div>
+                                    </div>
+                                </div>
+                                <div class="right">
+                                    <a href="#" class="hoverable"><i class="fab fa-github-square fa-lg"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="section_button">
+                    <div class="button "><a href="./pages/portfolio.html">see more</a></div>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <div class="parallax-window" data-z-index="1" data-speed="0.2" data-parallax="scroll"
+        data-image-src="{% static 'base/images/forest.jpg' %}">
+        <section class="section">
+
+            <div class="container">
+                <div class="section_heading">
+                    <h1>skills</h1>
+                    <h2>Skill and confidence are an
+                        unconquered army.
+                    </h2>
+                </div>
+                <div class="content">
+                    <div class="skills">
+
+                        <div class="skills_item">
+                            <h3>Developer</h3>
+                            <p>Languages:</p>
+                            <ul>
+                                <li>C</li>
+                                <li>C#</li>
+                                <li>HTML</li>
+                                <li>CSS</li>
+                                <li>JavaScript</li>
+                            </ul>
+
+                            <p>Software:</p>
+                            <ul>
+                                <li>Visual Studio</li>
+                                <li>JetBrains PHPStorm</li>
+                                <li>JetBrains WebStorm</li>
+                            </ul>
+
+                            <p>Data bases:</p>
+                            <ul>
+                                <li>SQLite</li>
+                            </ul>
+
+                        </div>
+
+                        <div class="skills_item">
+                            <h3>Designer</h3>
+                            <ul>
+                                <li>UX/GUI</li>
+                                <li>Wireframing</li>
+                                <li>Prototyping</li>
+                                <li>Photo Editing</li>
+                                <li>Digital Illustration</li>
+                                <li>Video Editing</li>
+                                <li>2D Animation</li>
+                            </ul>
+
+                            <p>Software:</p>
+                            <ul>
+                                <li>Adobe Photoshop</li>
+                                <li>Adobe Illustrator</li>
+                                <li>Adobe After Effects</li>
+                                <li>Adobe XD</li>
+                                <li>Avocode</li>
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <section class="section">
+
+        <div class="container">
+            <div class="section_heading">
+                <h1>about me</h1>
+                <h2>To shine your brightest light is to be who you truly are. </h2>
+            </div>
+            <div class="content">
+                <div class="about">
+                    <div class="img"></div>
+                    <div class="text">
+                        <p>Hi, I am an eighteen-year-old student from Ukraine. I am studying in the second course as a
+                            software developer. I am very keen on learning new things, and because programming is very
+                            demanding to knowledge, I have to do it every day. Usually, I read a bunch of articles from
+                            the internet and books about algorithms, data structures, program architecture and so on.
+                        </p>
+                        <p>My freshman year was very productive. I am by far one of the best students in my faculty. I
+                            have successfully defended my term paper on "Programming messenger".</p>
+                        <p>When I have free time, I try to do my hobbies. I like to engage in graphic design. I draw
+                            illustrations, UX, GUI, etc. on my graphics tablet. Also, I improve my English and attend
+                            karate classes.</p>
+
+                        <div class="button_wrapper">
+                            <div class="button"><a href="./pages/about.html">read more</a></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <div class="parallax-window" data-z-index="1" data-speed="0.2" data-parallax="scroll"
+        data-image-src="{% static 'base/images/lake.jpg' %}">
+
+        <section class="section" id="get_in_touch">
+
+                    <div class="container">
+                        <div class="section_heading">
+                            <h1>get in touch</h1>
+                            <h2>Reach out for a new project or just
+                                say hello
+                            </h2>
+                        </div>
+                        <div class="content">
+                            <div class="contact_me">
+
+                                <form method="post" id="get_in_touch_form">
+                                    {% csrf_token %}
+                                    <h3>Send me a message</h3>
+                                    {{ form.as_p }}
+                                    <div class="button" id="submit_form"><a>Send</a></div>
+                                    <div id="success"></div>
+                                </form>
+
+                                <div class="contact_info">
+                                    <h3>contact info</h3>
+
+                                    <p>Email Me</p>
+                                    <ul>
+                                        <li>partyskytime@gmail.com</li>
+                                        <li></li>
+                                    </ul>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+        </section>
+    </div>
+
+{% endblock content %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'base/styles/css/home_page.min.css' %}">
+{% endblock styles %}

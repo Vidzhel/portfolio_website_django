@@ -9,21 +9,9 @@ from django.template.defaultfilters import striptags
 def contact_form(request):
     form = ContactForm(request.POST or None)
 
-    # Check if it form redirection
+    # Check if it form redirection and send response
     if(request.method == "POST"):
-        # Validate form and make actions
-
-        if form.is_valid():
-            send_email(form.cleaned_data)
-            form = ContactForm()
-            response = {"success": "Thanks for being interested in me"}
-
-        else:
-            # Get dictionary with field id and error
-            response = {}
-            for error in form.errors.items():
-                response[error[0]] = str(striptags(error[1]))
-
+        response = manage_form(request, form, send_email)
         return HttpResponse(json.dumps(response), content_type="application/json")
 
     context = {
@@ -31,6 +19,23 @@ def contact_form(request):
     }
 
     return render(request, "contact_test_form/form_preview.html", context)
+
+
+def manage_form(request, form, action=None):
+
+    # Validate form and make actions
+    if form.is_valid():
+        if(action != None):
+            action(form.cleaned_data)
+        response = {"success": "Thanks for being interested in me"}
+
+    else:
+        # Get dictionary with field id and error
+        response = {}
+        for error in form.errors.items():
+            response[error[0]] = str(striptags(error[1]))
+
+    return response
 
 
 def send_email(data):

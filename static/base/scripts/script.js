@@ -79,19 +79,30 @@ window.onload = function () {
                         if (item === "success") {
                             var label = document.getElementById("success");
                             label.innerText = json[item];
+
+                            // Clear fields
+                            var fields = form_to_submit.getElementsByTagName("input");
+                            var textarea = form_to_submit.getElementsByTagName("textarea");
+                            textarea[0].value = "";
+                            for (var i = 0; i < fields.length; i++) {
+                                if (fields[i].getAttribute("name") !== "csrfmiddlewaretoken")
+                                    fields[i].value = "";
+                            }
+                            // Delete errors
                             var error;
                             while (error = document.querySelector(".error"))
                                 error.parentNode.removeChild(error);
-                        } else
+                        } else {
                             // If there is not errors
-                            if (document.getElementById(item).nextSibling === null || !document.getElementById(item).nextSibling.classList.contains("error")) {
+                            var field = document.getElementById(item)
+                            if (field !== null && (field.nextSibling === null || !field.nextSibling.classList.contains("error"))) {
                                 // Create element with text error and place it near appropriate input
                                 var error = document.createElement("p");
                                 error.classList.add("error");
                                 error.innerText = json[item]
-                                document.getElementById(item).parentNode.insertBefore(error, document.getElementById(item).nextSibling);
+                                field.parentNode.insertBefore(error, field.nextSibling);
                             }
-
+                        }
 
                     }
                 },
@@ -100,8 +111,6 @@ window.onload = function () {
                 error: function (xhr, errmsg, err) {
                     console.log(xhr.responseText)
                     console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-                    console.log(errors)
-
                 }
             });
         };
