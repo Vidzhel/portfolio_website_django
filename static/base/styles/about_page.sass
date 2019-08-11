@@ -1,0 +1,127 @@
+@import "./common_styles"
+
+.categories ul
+	margin: 0
+
+// About
+
+.about
+	display: flex
+	flex-wrap: wrap
+	align-items: stretch
+	justify-content: space-between
+
+	.img
+		min-height: 300px
+		min-width: 200px
+		max-height: 400px
+		flex: 1
+		background-color: #fff
+
+	.text
+		font-family: $lato
+		font-size: 15px
+		margin-left: 80px
+		flex: 2
+
+		p
+			color: #8A8A8A
+
+		p:first-child
+			margin-top: 0
+			color: #D7D7D7
+
+		.button_wrapper
+			margin-top: 20px
+			display: flex
+			justify-content: center
+	
+// Education
+
+.education
+    background-color: $secondaryBGColor
+
+    .education_item
+        margin: 20px 0
+
+        h3
+            font-size: 15px
+            font-weight: 600
+            letter-spacing: 1.42px
+            line-height: 27px
+            color: $accentColor
+
+            span
+                color: #ffffff
+
+        span
+            color: #ffffff
+            font-size: 13px
+            font-weight: 300
+            letter-spacing: 1.21px
+
+            b
+                color: $accentColor
+
+        p
+            color: #999
+            font-size: 13px
+            font-weight: 400
+            letter-spacing: 1.14px
+            line-height: 27px
+
+// Honors
+
+.honors
+    background-color: $primaryBGColor
+
+// Skills
+.skills
+	user-select: none
+	opacity: 1
+	display: flex
+	justify-content: space-around
+	flex-wrap: wrap
+
+	.skills_item
+		margin-top: 30px
+		width: 300px
+		border-radius: 10px
+		padding: 18px 40px
+		background-color: white
+		color: #000
+
+		h3
+			font-size: 30px
+			text-align: center
+			font-weight: 300
+			margin: 0
+			letter-spacing: 3px
+
+		p
+			color: $accentColor
+
+@media screen and (max-width: 450px)
+
+    header .section_heading .button
+        margin-bottom: 15px
+                
+@media screen and (max-width: 550px)
+
+	.about
+		flex-direction: column
+		align-items: center
+
+		.text
+			margin: 30px 0 0 0
+
+@media screen and (min-width: 1024px)
+	
+   .section_nav .container
+        position: relative
+        min-height: 25px
+        z-index: 0
+
+        ul
+            position: absolute
+            right: 0

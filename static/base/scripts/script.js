@@ -1,4 +1,46 @@
 window.onload = function () {
+
+    // *Animate fading in
+
+    function y_offset_comparer(first_element, second_element) {
+        if (first_element.offsetTop > second_element.offsetTop)
+            return -1;
+        else if (first_element.offsetTop == second_element.offsetTop)
+            return 0;
+
+        return 1;
+    }
+
+
+    function get_fade_in_elements() {
+        var elements = document.getElementsByClassName("fade_in")
+
+        // sort if necessary
+        if (elements.length > 1)
+            return (Array.prototype.slice.call(elements)).sort(y_offset_comparer);
+        return elements
+
+    }
+
+    var animate_on_bottom_offset = 300;
+
+    function fade_in(elements) {
+        if (elements === null || elements == undefined || elements.length == 0)
+            return;
+        var screenBottom = window.pageYOffset + Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+        while ((elements[elements.length - 1].offsetTop + animate_on_bottom_offset) <= screenBottom) {
+            if (elements.length > 1)
+                var element_to_animate = elements.pop();
+            else
+                var element_to_animate = elements[0];
+
+            element_to_animate.classList.add("animation");
+            element_to_animate.classList.remove("fade_in");
+        }
+
+        return elements
+    }
+
     // *Preloader
     var preloader = (document.getElementsByClassName("preloader"))[0];
     if (preloader != undefined && preloader != null)
@@ -28,7 +70,8 @@ window.onload = function () {
     // *Sticky navbar
 
     window.onscroll = function () {
-        sticky_navbar_anim()
+        sticky_navbar_anim();
+        fade_in(get_fade_in_elements());
     };
 
     var navbar = document.getElementsByClassName("fixed_nav");
@@ -126,12 +169,17 @@ window.onload = function () {
             var anchor_point = element.dataset.anchor
             var duration = element.dataset.duration
 
-            if (anchor_point !== undefined && anchor_point !== null && duration !== undefined && duration !== null)
+            if (duration !== undefined && duration !== null)
                 element.onclick = function () {
-                    var anchor_obj = document.getElementById(element.dataset.anchor);
+
+                    if (element.dataset.anchor === undefined)
+                        var end_position = 0;
+                    else {
+                        var anchor_obj = document.getElementById(element.dataset.anchor);
+                        var end_position = anchor_obj.offsetTop;
+                    }
 
                     var start_position = window.pageYOffset;
-                    var end_position = anchor_obj.offsetTop;
                     var distance = end_position - start_position;
                     var startTime = null
 
@@ -140,12 +188,12 @@ window.onload = function () {
                             startTime = currentTime;
                         }
 
-                        var timeElepsed = currentTime - startTime;
+                        var timeElapsed = currentTime - startTime;
 
-                        var go_to = ease(timeElepsed, start_position, distance, duration);
+                        var go_to = ease(timeElapsed, start_position, distance, duration);
                         window.scrollTo(0, go_to);
 
-                        if (timeElepsed < duration)
+                        if (timeElapsed < duration)
                             requestAnimationFrame(animate)
                     }
 

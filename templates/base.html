@@ -78,8 +78,10 @@
             <circle cx="50" cy="50" r="40" class="loader" />
         </svg>
     </div>
-
-
+    {% block fixed_nav %}
+    
+    {% endblock fixed_nav %}
+    
     {% block content %}
         {% comment %} Content goes here {% endcomment %}
     {% endblock content %}

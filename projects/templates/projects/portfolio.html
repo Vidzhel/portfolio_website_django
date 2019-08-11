@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% comment %} {% block meta %}
+{% endblock meta %} {% endcomment %}
+
+{% block fixed_nav %}
+
+        <div class="nav_wrapper">
+            <div class="fixed_nav">
+                <div class="anim_inner outher_container">
+                    <a href="{% url 'home_page' %}">
+
+                        <div class="logo">
+
+                            <img class="lazyload"
+                                src="data:image/gif;base64,R0lGODlhCgAIAIABAN3d3f///yH5BAEAAAEALAAAAAAKAAgAAAINjAOnyJv2oJOrVXrzKQA7"
+                                data-src="{% static 'base/images/Logo.png' %}" alt="vidzhel_logo">
+                            <span class="logo_text">Vidzhel</span>
+
+                        </div>
+                    </a>
+                    <nav class="main_nav">
+                        <ul class="list_container">
+                            <li id="menu" class="menu_icon"><i class="fas fa-bars fa-lg"></i></li>
+                            <div class="list">
+                                <ul>
+                                    <li><a href="{% url 'home_page' %}">HOME</a></li>
+                                    <li class="active"><a href="">PORTFOLIO</a></li>
+                                    <li><a href="">ABOUT</a></li>
+                                    <li><a href="{% url 'home_page' %}#get_in_touch">CONTACT</a></li>
+                                </ul>
+                            </div>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        
+{% endblock fixed_nav %}
+
+{% block content %}
+
+
+<div class="parallax-window" data-z-index="1" data-speed="0.2" data-parallax="scroll"
+    data-image-src="{% static 'base/images/forest.jpg' %}">
+
+    <header class="header">
+        <div class="outher_container">
+            <div class="section_heading">
+                <h1>PORTFOLIO</h1>
+                <h2>I love what I do, check out some
+                    of my latest works
+                </h2>
+                <div class="button"><a href="../index.html#get_in_touch">Get in touch</a></div>
+            </div>
+
+            <div class="social_media">
+                <a target="_blank" href="https://github.com/Vidzhel" class="hoverable"><i
+                        class="fab fa-github-square fa-lg"></i></a>
+                <a target="_blank" href="https://www.linkedin.com/in/vidzhel/" class="hoverable"><i
+                        class="fab fa-linkedin fa-lg"></i></a>
+                <a target="_blank" href="https://www.pinterest.com/Vidzhel" class="hoverable"><i
+                        class="fab fa-pinterest-square fa-lg"></i></a>
+            </div>
+
+        </div>
+    </header>
+</div>
+
+<div class="section_nav">
+    <div class="container">
+        <div class="tags_list">
+            {% for tag in tags %}
+                <div class="tag"><a>{{tag.name}}</a></div>
+            {% endfor %}
+        </div>
+
+        <div class="categories">
+            <ul>
+                <li><a class="category active">All</a></li>
+                {% for category in categories %}
+                    <li><a class="category" >{{category.name}}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+<section class="section" style="min-height: 380px">
+    <div class="container">
+
+        <div id="projects" class="projects smooth_scroll" data-anchor="projects" data-duration="500">
+            {% for project in projects %}
+                    
+                    <div class="project_item {% if project.in_progress %} in_progress {% endif %}">
+                        <div class="read_more">
+                            <div class="button"><a href="{% url 'home_page' %}">Read more</a></div>
+                        </div>
+                        <img class="lazyload"
+                            src="data:image/gif;base64,R0lGODlhCgAIAIABAN3d3f///yH5BAEAAAEALAAAAAAKAAgAAAINjAOnyJv2oJOrVXrzKQA7"
+                            data-src="/media/{{project.img}}" alt="project_image">
+                        <div class="project_item_content">
+                            <div class="title">{{project.title}}</div>
+                            <div class="summary">{{project.about}}</div>
+                            <div class="bottom_line">
+                                <div class="left">
+                                    <div class="project_tags">
+                                        {% for tag in project.tags.all  %}
+                                            <div class="tag"><a href="#">{{tag.name}}</a></div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="right">
+                                    <a href="{{project.code_source}}" class="hoverable"><i class="fab fa-github-square fa-lg"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% endfor %}
+        </div>
+
+    </div>
+</section>
+
+{% endblock content %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'base/styles/css/portfolio_page.min.css' %}">
+    <script src="{% static 'base/scripts/projects.js' %}"></script>
+{% endblock styles %}

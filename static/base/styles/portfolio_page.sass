@@ -1,0 +1,31 @@
+@import "./common_styles"
+
+
+
+// Portfolio
+.section_nav
+
+    .tags_list
+        // overflow-y: auto
+        // white-space: nowrap
+        // overflow: -moz-scrollbars-none
+        // -ms-overflow-style: none
+
+        &::-webkit-scrollbar
+            width: 0 !important 
+
+        .tag
+            display: inline-block
+            margin: 0 5px 0 0
+
+        .active a
+            color: $primaryBGColor
+            background-color: $accentColor
+
+@media screen and (min-width: 1024px)
+
+    .section_nav .container
+        flex-direction: row
+        justify-content: space-between
+
+            

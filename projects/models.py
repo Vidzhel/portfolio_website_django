@@ -21,9 +21,14 @@ class Tag(models.Model):
 
 class ProjectItem(models.Model):
     """Represent a project with all necessary info"""
-    title = models.CharField(max_length=40, primary_key=True)
+    alias = models.CharField(max_length=40, primary_key=True)
+    title = models.CharField(max_length=40)
+    img = models.ImageField(
+        upload_to=f"project_item/images", help_text="Select image for this project")
 
     upload_date = models.DateField(auto_now=False, auto_now_add=True)
+    in_progress = models.BooleanField(default=False,
+                                      help_text="Determines if this project currently in progress")
 
     code_source = models.CharField(
         max_length=100, help_text="Link on this project's code source")
@@ -34,15 +39,15 @@ class ProjectItem(models.Model):
 
     about = models.TextField()
     about_img = models.ImageField(
-        upload_to=f"project_item/{title}/images", help_text="Select image for this section", null=True, blank=True)
+        upload_to=f"project_item/images", help_text="Select image for this section", null=True, blank=True)
 
     project_difficulties = models.TextField(null=True, blank=True)
     project_difficulties_img = models.ImageField(
-        upload_to=f"project_item/{title}/images", help_text="Select image for this section", null=True, blank=True)
+        upload_to=f"project_item/images", help_text="Select image for this section", null=True, blank=True)
 
     solutions = models.TextField(null=True, blank=True)
     solutions_img = models.ImageField(
-        upload_to=f"project_item/{title}/images", help_text="Select image for this section", null=True, blank=True)
+        upload_to=f"project_item/images", help_text="Select image for this section", null=True, blank=True)
 
     features = models.TextField(null=True, blank=True)
     technologies = models.TextField(null=True, blank=True)
@@ -54,4 +59,5 @@ class ProjectItem(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse("project_item", kwargs={"pk": self.pk})
+        return "foo"
+        # return reverse("projects", kwargs={"pk": self.pk})

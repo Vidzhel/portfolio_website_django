@@ -4,9 +4,9 @@
 {% comment %} {% block meta %}
 {% endblock meta %} {% endcomment %}
 
-{% block content %}
-    <header>
-        <div class="outher_container">
+{% block fixed_nav %}
+
+        <div class="nav_wrapper">
             <div class="fixed_nav">
                 <div class="anim_inner outher_container">
                     <a href="{% url 'home_page' %}">
@@ -25,9 +25,9 @@
                             <li id="menu" class="menu_icon"><i class="fas fa-bars fa-lg"></i></li>
                             <div class="list">
                                 <ul>
-                                    <li class="active"><a href="index.html">HOME</a></li>
-                                    <li><a href="/pages/portfolio.html">PORTFOLIO</a></li>
-                                    <li><a href="/pages/about.html">ABOUT</a></li>
+                                    <li class="active"><a href="{% url 'home_page' %}">HOME</a></li>
+                                    <li><a href="{% url 'projects_list' %}">PORTFOLIO</a></li>
+                                    <li><a href="">ABOUT</a></li>
                                     <li><a class="smooth_scroll" data-anchor="get_in_touch"
                                             data-duration="2000">CONTACT</a></li>
                                 </ul>
@@ -36,7 +36,14 @@
                     </nav>
                 </div>
             </div>
+        </div>
+        
+{% endblock fixed_nav %}
 
+{% block content %}
+
+    <header>
+        <div class="outher_container">
             <div class="social_media">
                 <a target="_blank" href="https://github.com/Vidzhel" class="hoverable"><i
                         class="fab fa-github-square fa-lg"></i></a>
@@ -65,98 +72,51 @@
         </div>
     </header>
 
-    <section id="scroll_down" class="section">
+    <section id="scroll_down" class="section fade_in ">
 
         <div class="container">
             <div class="section_heading">
                 <h1>Recent works</h1>
                 <h2>I love what i do, check out some of my latest works</h2>
             </div>
+
             <div class="content">
                 <div class="projects">
-                    <div class="project_item in_progress">
+                    {% for project in projects %}
+                    
+                    <div class="project_item {% if project.in_progress %} in_progress {% endif %}">
                         <div class="read_more">
-                            <div class="button"><a href="./pages/portfolio_item.html">Read more</a></div>
+                            <div class="button"><a href="{% url 'home_page' %}">Read more</a></div>
                         </div>
                         <img class="lazyload"
                             src="data:image/gif;base64,R0lGODlhCgAIAIABAN3d3f///yH5BAEAAAEALAAAAAAKAAgAAAINjAOnyJv2oJOrVXrzKQA7"
-                            data-src="/media/img/main_page/Image 5.jpg" alt="project_image">
+                            data-src="/media/{{project.img}}" alt="project_image">
                         <div class="project_item_content">
-                            <div class="title">Desktop Manager</div>
-                            <div class="summary">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eveniet
-                                vitae
-                                totam ut harum quidem nisi mollitia vel veritatis provident nam,.</div>
+                            <div class="title">{{project.title}}</div>
+                            <div class="summary">{{project.about}}</div>
                             <div class="bottom_line">
                                 <div class="left">
                                     <div class="project_tags">
-                                        <div class="tag"><a href="#">c</a></div>
-                                        <div class="tag"><a href="#">gui/ux</a></div>
+                                        {% for tag in project.tags.all  %}
+                                            <div class="tag"><a href="#">{{tag.name}}</a></div>
+                                        {% endfor %}
                                     </div>
                                 </div>
                                 <div class="right">
-                                    <a href="#" class="hoverable"><i class="fab fa-github-square fa-lg"></i></a>
+                                    <a href="{{project.code_source}}" class="hoverable"><i class="fab fa-github-square fa-lg"></i></a>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="project_item">
-                        <div class="read_more">
-                            <div class="button"><a href="#">Read more</a></div>
-                        </div>
-                        <img class="lazyload"
-                            src="data:image/gif;base64,R0lGODlhCgAIAIABAN3d3f///yH5BAEAAAEALAAAAAAKAAgAAAINjAOnyJv2oJOrVXrzKQA7"
-                            data-src="/media/img/main_page/Image 5.jpg" alt="project_image">
-                        <div class="project_item_content">
-                            <div class="title">Desktop Manager</div>
-                            <div class="summary">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eveniet
-                                vitae
-                                totam ut harum quidem nisi mollitia vel veritatis provident nam,.</div>
-                            <div class="bottom_line">
-                                <div class="left">
-                                    <div class="project_tags">
-                                        <div class="tag"><a href="#">c</a></div>
-                                        <div class="tag"><a href="#">gui/ux</a></div>
-                                    </div>
-                                </div>
-                                <div class="right">
-                                    <a href="#" class="hoverable"><i class="fab fa-github-square fa-lg"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project_item">
-                        <div class="read_more">
-                            <div class="button"><a href="#">Read more</a></div>
-                        </div>
-                        <img class="lazyload"
-                            src="data:image/gif;base64,R0lGODlhCgAIAIABAN3d3f///yH5BAEAAAEALAAAAAAKAAgAAAINjAOnyJv2oJOrVXrzKQA7"
-                            data-src="/media/img/main_page/placeholder.jfif" alt="project_image">
-                        <div class="project_item_content">
-                            <div class="title">Desktop Manager</div>
-                            <div class="summary">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eveniet
-                                vitae. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eveniet
-                                vitae
-                                totam ut harum quidem nisi mollitia vel veritatis provident nam,.</div>
-                            <div class="bottom_line">
-                                <div class="left">
-                                    <div class="project_tags">
-                                        <div class="tag"><a href="#">c</a></div>
-                                        <div class="tag"><a href="#">gui/ux</a></div>
-                                    </div>
-                                </div>
-                                <div class="right">
-                                    <a href="#" class="hoverable"><i class="fab fa-github-square fa-lg"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
 
                 </div>
                 <div class="section_button">
                     <div class="button "><a href="./pages/portfolio.html">see more</a></div>
                 </div>
+            
+            
             </div>
 
         </div>
@@ -233,7 +193,7 @@
         </section>
     </div>
 
-    <section class="section">
+    <section class="section fade_in">
 
         <div class="container">
             <div class="section_heading">

@@ -15,6 +15,15 @@
     text-align: center
     margin-top: 10px
 
+// Common
+
+.animation
+    transition: all .4s ease-in-out !important
+
+.fade_in
+    opacity: 0
+    transform: translate(0, 100px)
+
 body
     margin: 0
     opacity: 1
@@ -379,6 +388,9 @@ textarea
     &:last-child
         margin-right: 0
 
+.tag.active a
+    background-color: $accentColor
+
 footer
     background: $secondaryBGColor
 
@@ -490,10 +502,10 @@ footer
     .outher_container
         width: 90%
 
-    header
+    .nav_wrapper
         position: relative
 
-    header .main_nav
+    .nav_wrapper .main_nav
 
         li
             text-align: center
@@ -535,7 +547,7 @@ footer
                 margin-right: 0
                 transition: opacity .4s ease-in-out
         
-    header .responsive .list
+    .nav_wrapper .responsive .list
 
         ul
             height: 160px !important
@@ -543,12 +555,12 @@ footer
         li
             opacity: 1 !important
 
-    header .fixed_nav
+    .fixed_nav
         background: rgba(32, 33,38,1)
         box-shadow: 0 5px 10px rgba(0,0,0,0.2)
         padding: 0
 
-    @media screen and (min-width: 1024px) and (max-width: 1300px)
+@media screen and (min-width: 1024px) and (max-width: 1300px)
         .container
             width: 800px
 
