@@ -98,7 +98,7 @@
                                 <div class="left">
                                     <div class="project_tags">
                                         {% for tag in project.tags.all  %}
-                                            <div class="tag"><a href="#">{{tag.name}}</a></div>
+                                            <div class="tag"><a href="{{tag.get_absolute_url}}">{{tag.name}}</a></div>
                                         {% endfor %}
                                     </div>
                                 </div>
@@ -113,7 +113,7 @@
 
                 </div>
                 <div class="section_button">
-                    <div class="button "><a href="./pages/portfolio.html">see more</a></div>
+                    <div class="button "><a href="{% url 'projects_list' %}">see more</a></div>
                 </div>
             
             

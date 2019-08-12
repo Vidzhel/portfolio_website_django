@@ -81,7 +81,7 @@ window.addEventListener("DOMContentLoaded", function () {
         });
 
         $.ajax({
-            url: "", // the endpoint
+            url: "/portfolio/", // the endpoint
             type: "GET", // http method
             dataType: "json",
             data: {
@@ -92,6 +92,7 @@ window.addEventListener("DOMContentLoaded", function () {
             // handle a successful response
             success: function (json) {
                 // Delete all project items
+                console.log(json)
                 var projects_container = (document.getElementsByClassName("projects"))[0];
                 // Create new project items from filtered info
                 projects_container.innerHTML = "";

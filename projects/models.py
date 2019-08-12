@@ -10,6 +10,9 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse("projects_list", kwargs={"filtered": "filtered"}) + "?category=" + self.name
+
 
 class Tag(models.Model):
     """Represent tags that can be attached to a project item"""
@@ -17,6 +20,9 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse("projects_list", kwargs={"filtered": "filtered"}) + "?tags=" + self.name
 
 
 class ProjectItem(models.Model):
