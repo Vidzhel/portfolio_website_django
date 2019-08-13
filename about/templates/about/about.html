@@ -1,0 +1,251 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% comment %} {% block meta %}
+{% endblock meta %} {% endcomment %}
+
+{% block fixed_nav %}
+
+        <div class="nav_wrapper">
+            <div class="fixed_nav">
+                <div class="anim_inner outher_container">
+                    <a href="{% url 'home_page' %}">
+
+                        <div class="logo">
+
+                            <img class="lazyload"
+                                src="data:image/gif;base64,R0lGODlhCgAIAIABAN3d3f///yH5BAEAAAEALAAAAAAKAAgAAAINjAOnyJv2oJOrVXrzKQA7"
+                                data-src="{% static 'base/images/Logo.png' %}" alt="vidzhel_logo">
+                            <span class="logo_text">Vidzhel</span>
+
+                        </div>
+                    </a>
+                    <nav class="main_nav">
+                        <ul class="list_container">
+                            <li id="menu" class="menu_icon"><i class="fas fa-bars fa-lg"></i></li>
+                            <div class="list">
+                                <ul>
+                                    <li><a href="{% url 'home_page' %}">HOME</a></li>
+                                    <li><a href="{% url 'projects_list' %}">PORTFOLIO</a></li>
+                                    <li class="active"><a href="{% url 'about' %}">ABOUT</a></li>
+                                    <li><a href="{% url 'home_page' %}#get_in_touch">CONTACT</a></li>
+                                </ul>
+                            </div>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        
+{% endblock fixed_nav %}
+
+{% block content %}
+
+    <div class="parallax-window" data-z-index="1" data-speed="0.2" data-parallax="scroll"
+        data-image-src="{% static 'base/images/lake.jpg' %}">
+
+        <header class="header">
+            <div class="outher_container">
+                <div class="section_heading">
+                    <h1>ABOUT ME</h1>
+                    <h2>To shine your brightest light is to be who you truly are.
+                    </h2>
+                    <div class="button"><a href="../index.html#get_in_touch">Get in touch</a></div>
+                    <div class="button"><a href="#">Download CV</a></div>
+                </div>
+
+                <div class="social_media">
+                    <a target="_blank" href="https://github.com/Vidzhel" class="hoverable"><i
+                            class="fab fa-github-square fa-lg"></i></a>
+                    <a target="_blank" href="https://www.linkedin.com/in/vidzhel/" class="hoverable"><i
+                            class="fab fa-linkedin fa-lg"></i></a>
+                    <a target="_blank" href="https://www.pinterest.com/Vidzhel" class="hoverable"><i
+                            class="fab fa-pinterest-square fa-lg"></i></a>
+                </div>
+
+            </div>
+        </header>
+    </div>
+
+    <div class="section_nav">
+        <div class="container">
+            <div class="categories">
+                <ul>
+                    <li><a class="smooth_scroll" data-anchor="about" data-duration="1000">ABOUT</a></li>
+                    {% if education %}
+                        <li><a class="smooth_scroll" data-anchor="education" data-duration="1300">EDUCATION</a></li>
+                    {% endif %}
+                    {% if developer_skills or designer_skills %}
+                    <li><a class="smooth_scroll" data-anchor="skills" data-duration="1500">SKILLS</a></li>
+                    {% endif %}
+                    {% if work_experience %}
+                    <li><a class="smooth_scroll" data-anchor="work_experience" data-duration="1700">WORK EXPERIENCE</a>
+                    </li>
+                    {% endif %}
+                    {% if honors %}
+                    <li><a class="smooth_scroll" data-anchor="honors" data-duration="2000">HONORS</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <section class="section " id="about">
+
+        <div class="text_container fade_in">
+            <div class="content">
+                <div class="about">
+                    {% if about_img %}
+                    <div class="img"><img src="/media/{{about_img}}" alt="me"></div>
+                    {% endif %}
+                    <div class="text">
+                        {{about |safe}}
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    {% if education %}
+        <section class="section education" id="education">
+
+            <div class="text_container fade_in">
+                <div class="section_heading">
+                    <h1>EDUCATION</h1>
+                </div>
+                <div class="content">
+
+                    {% for education_item in education %}
+                        <div class="education_item">
+                            <h3>{{education_item.title|safe}}</h3>
+                            <span>{{education_item.years|safe}}</span>
+                            {{education_item.text|safe}}
+                        </div>
+                    {% endfor %}
+
+            </div>
+
+        </section>
+    {% endif %}
+
+    {% if developer_skills or designer_skills %}
+        <div class="parallax-window" id="skills" data-z-index="1" data-speed="0.2" data-parallax="scroll"
+            data-image-src="{% static 'base/images/forest.jpg' %}">
+
+            <section class="section">
+
+                <div class="container">
+                    <div class="section_heading">
+                        <h1>skills</h1>
+                        <h2>Skill and confidence are an
+                            unconquered army.
+                        </h2>
+                    </div>
+                    <div class="content">
+                        <div class="skills">
+
+                            <div class="skills_item">
+                                <h3>Developer</h3>
+
+                                {% for skill in developer_skills %}
+
+                                    <p>{{skill.title|safe}}</p>
+                                    <ul>
+                                        {% for item in skill.items %}
+                                            {% if item %}
+                                            <li>{{item|safe}}</li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                    
+                                {% endfor %}
+
+                            </div>
+
+                            <div class="skills_item">
+                                <h3>Designer</h3>
+                                
+                                {% for skill in designer_skills %}
+
+                                    <p>{{skill.title}}</p>
+                                    <ul>
+                                        {% for item in skill.items %}
+                                            {% if item %}
+                                            <li>{{item}}</li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                    
+                                {% endfor %}
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+        </div>
+    {% endif %}
+
+    {% if work_experience  %}
+        <section class="section education " id="work_experience">
+
+            <div class="text_container fade_in">
+                <div class="section_heading">
+                    <h1>Work EXPERIENCE</h1>
+                </div>
+                <div class="content">
+
+                    {% for item in work_experience %}
+                        <div class="education_item">
+                            <h3>{{item.title|safe}}</h3>
+                            <span>{{item.years|safe}}</span>
+                            {{item.text|safe}}
+                        </div>
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+        </section>
+    {% endif %}
+
+    {% if honors  %}
+        <section id="honors" class="section education honors ">
+
+            <div class="text_container fade_in">
+                <div class="section_heading">
+                    <h1>honors</h1>
+                    <!-- <h2>To shine your brightest light is to be who you truly are. </h2> -->
+                </div>
+                <div class="content">
+
+                    {% for item in honors %}
+                        <div class="education_item">
+                            <h3>{{item.title|safe}}</h3>
+                            <span>{{item.years|safe}}</span>
+                            {{item.text|safe}}
+                        </div>
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+        </section>
+    {% endif %}
+
+
+{% endblock content %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'base/styles/css/about_page.min.css' %}">
+{% endblock styles %}

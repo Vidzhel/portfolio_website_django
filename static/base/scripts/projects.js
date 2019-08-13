@@ -40,7 +40,7 @@ window.addEventListener("DOMContentLoaded", function () {
                         data-src="' + element.img + '" alt="project_image">\
                     <div class="project_item_content">\
                         <div class="title">' + element.title + '</div>\
-                        <div class="summary">' + element.about + '</div>\
+                        <div class="summary">' + element.description + '</div>\
                         <div class="bottom_line">\
                             <div class="left">\
                                 <div class="project_tags">' + tags_list + '</div>\
@@ -70,7 +70,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
     // * Filter
 
-    function sendFilterRequest() {
+    function sendFilterRequest(page = 0) {
         var section_nav = document.querySelector(".section_nav")
         var active_tags = section_nav.querySelectorAll(".tag.active");
         var category = section_nav.querySelector(".category.active").innerText;
@@ -85,18 +85,34 @@ window.addEventListener("DOMContentLoaded", function () {
             type: "GET", // http method
             dataType: "json",
             data: {
+                page: page,
                 tags: JSON.stringify(tags),
                 category: JSON.stringify(category)
             },
 
             // handle a successful response
             success: function (json) {
-                // Delete all project items
-                console.log(json)
-                var projects_container = (document.getElementsByClassName("projects"))[0];
-                // Create new project items from filtered info
-                projects_container.innerHTML = "";
+                // If it's first page Delete old project items
+
+                if (page === 0) {
+                    var projects_container = (document.getElementsByClassName("projects"))[0];
+                    // Create new project items from filtered info
+                    projects_container.innerHTML = "";
+
+                    // Get loaded projects and overall projects count
+                    var projects_container = document.getElementById("projects");
+                    var overall_projects_count = (json[0])["projects_count"]
+                    projects_container.dataset = overall_projects_count
+                    var loaded_projects = (projects_container.getElementsByClassName("project_item")).length;
+
+                    if (overall_projects_count - loaded_projects > 0) {
+                        var load_more_button = document.getElementById("load_more");
+                        load_more_button.style.cssText = "";
+                    }
+
+                }
                 create_projects(json);
+
             },
 
             // handle a non-successful response
@@ -160,4 +176,33 @@ window.addEventListener("DOMContentLoaded", function () {
         });
 
     }
+
+    // *PAGINATION
+
+    var load_more_button = document.getElementById("load_more");
+
+    load_more_button.onclick = function () {
+        load_more_projects()
+    }
+
+    var PAGINATION_PAGE_NUM = 5;
+
+    function load_more_projects() {
+
+        // Get loaded projects and overall projects count
+        var projects_container = document.getElementById("projects");
+        var overall_projects_count = projects_container.dataset.projects_count;
+        var loaded_projects = (projects_container.getElementsByClassName("project_item")).length;
+
+        // If there are projects that can be loaded than send request
+        if (overall_projects_count - loaded_projects > 0) {
+            page = Math.floor(loaded_projects / PAGINATION_PAGE_NUM);
+
+            sendFilterRequest(page);
+
+            if (overall_projects_count - loaded_projects - PAGINATION_PAGE_NUM <= 0)
+                load_more_button.style.cssText = "visibility: hidden;";
+        }
+    }
+
 });

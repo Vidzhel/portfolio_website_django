@@ -27,7 +27,7 @@
                                 <ul>
                                     <li><a href="{% url 'home_page' %}">HOME</a></li>
                                     <li class="active"><a href="">PORTFOLIO</a></li>
-                                    <li><a href="">ABOUT</a></li>
+                                    <li><a href="{% url 'about' %}">ABOUT</a></li>
                                     <li><a href="{% url 'home_page' %}#get_in_touch">CONTACT</a></li>
                                 </ul>
                             </div>
@@ -52,7 +52,7 @@
                 <h2>I love what I do, check out some
                     of my latest works
                 </h2>
-                <div class="button"><a href="../index.html#get_in_touch">Get in touch</a></div>
+                <div class="button"><a href="{% url 'home_page' %}#get_in_touch">Get in touch</a></div>
             </div>
 
             <div class="social_media">
@@ -90,7 +90,7 @@
 <section class="section" style="min-height: 380px">
     <div class="container">
 
-        <div id="projects" class="projects smooth_scroll" data-anchor="projects" data-duration="500">
+        <div id="projects" class="projects smooth_scroll" data-anchor="projects" data-duration="500" data-projects_count="{{projects_count}}">
             {% for project in projects %}
                     
                     <div class="project_item {% if project.in_progress %} in_progress {% endif %}">
@@ -102,7 +102,7 @@
                             data-src="/media/{{project.img}}" alt="project_image">
                         <div class="project_item_content">
                             <div class="title">{{project.title}}</div>
-                            <div class="summary">{{project.about}}</div>
+                            <div class="summary">{{project.description}}</div>
                             <div class="bottom_line">
                                 <div class="left">
                                     <div class="project_tags">
@@ -120,8 +120,11 @@
 
                     {% endfor %}
         </div>
-
+        <div class="button_wrapper">
+            <div class="button" id="load_more"><a>Load more</a></div>
+        </div>
     </div>
+
 </section>
 
 {% endblock content %}

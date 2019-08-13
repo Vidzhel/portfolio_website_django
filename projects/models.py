@@ -29,10 +29,11 @@ class ProjectItem(models.Model):
     """Represent a project with all necessary info"""
     alias = models.CharField(max_length=40, primary_key=True)
     title = models.CharField(max_length=40)
+    description = models.TextField()
     img = models.ImageField(
         upload_to=f"project_item/images", help_text="Select image for this project")
 
-    upload_date = models.DateField(auto_now=False, auto_now_add=True)
+    upload_date = models.DateTimeField(auto_now=False, auto_now_add=True)
     in_progress = models.BooleanField(default=False,
                                       help_text="Determines if this project currently in progress")
 
@@ -59,7 +60,7 @@ class ProjectItem(models.Model):
     technologies = models.TextField(null=True, blank=True)
 
     class Meta:
-        ordering = ["upload_date"]
+        ordering = ["-upload_date"]
 
     def __str__(self):
         return self.title
