@@ -1,0 +1,243 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+    <!-- Tell google that is the main page with content that may be duplicated on page provided with href -->
+    <link rel="canonical" href="{% url 'project_details' project.alias %}">
+{% endblock meta %}
+
+{% block fixed_nav %}
+
+        <div class="nav_wrapper">
+            <div class="fixed_nav">
+                <div class="anim_inner outher_container">
+                    <a class="logo_link" href="{% url 'home_page' %}">
+
+                        <div class="logo">
+
+                            <img src="{% static 'base/images/Logo.png' %}" alt="vidzhel_logo">
+                            <span class="logo_text">Vidzhel</span>
+
+                        </div>
+                    </a>
+                    <nav class="main_nav">
+                        <ul class="list_container">
+                            <li id="menu" class="menu_icon"><i class="fas fa-bars fa-lg"></i></li>
+                            <div class="list">
+                                <ul>
+                                    <li><a href="{% url 'home_page' %}">HOME</a></li>
+                                    <li class="active"><a href="{% url 'projects_list' %}">PORTFOLIO</a></li>
+                                    <li><a href="{% url 'about' %}">ABOUT</a></li>
+                                    <li><a href="{% url 'home_page' %}#get_in_touch">CONTACT</a></li>
+                                </ul>
+                            </div>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        
+{% endblock fixed_nav %}
+
+{% block content %}
+
+    <div class="parallax-window" data-z-index="1" data-speed="0.2" data-parallax="scroll"
+        data-image-src="/media/{{project.img}}">
+
+        <header class="header">
+            <div class="outher_container">
+               
+                <div class="section_heading">
+                    <h1>Project</h1>
+                    <h2>
+                        {{project.title}}
+                    </h2>
+                    <div class="button"><a rel="nofollow" href="{{project.code_source}}">code source</a></div>
+                </div>
+
+                <div class="social_media">
+                    <a target="_blank" rel="nofollow" href="https://github.com/Vidzhel" class="hoverable"><i
+                            class="fab fa-github-square fa-lg"></i></a>
+                    <a target="_blank" rel="nofollow" href="https://www.linkedin.com/in/vidzhel/" class="hoverable"><i
+                            class="fab fa-linkedin fa-lg"></i></a>
+                    <a target="_blank" rel="nofollow" href="https://www.behance.net/vidzhel" class="hoverable"><i class="fab fa-behance-square fa-lg"></i></a>
+                </div>
+
+            </div>
+        </header>
+    </div>
+
+    <div class="section_nav">
+        <div class="container">
+            <div class="categories">
+                <ul>
+                    {% if project.about %}
+                    <li><a class="smooth_scroll" data-anchor="about" data-duration="1000">ABOUT</a></li>
+                    {% endif %}
+
+                    {% if project.project_difficulties %}
+
+                    <li><a class="smooth_scroll" data-anchor="project_difficulties" data-duration="1300">Project
+                            Difficulties</a>
+                    </li>
+                    {% endif %}
+
+                    {% if project.solutions %}
+                    <li><a class="smooth_scroll" data-anchor="solutions" data-duration="1500">solutions</a></li>
+                    {% endif %}
+
+                    {% if project.features or project.technologies %}
+                    
+                    <li><a class="smooth_scroll" data-anchor="features" data-duration="1700">features</a>
+                    </li>
+
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    {% if project.about %}
+    <section class="section about" id="about">
+
+        <div class="text_container">
+            <div class="section_heading">
+                <h1>about</h1>
+            </div>
+            <div class="content">
+               {{project.about|safe}}
+            </div>
+        </div>
+        {% if project.about_img %}
+
+        <div class="img_container">
+            <img src="/media/{{project.about_img}}" alt="section image">
+            <img class="bg" src="/media/{{project.about_img}}" alt="section image">
+        </div>
+        {% endif %}
+
+    </section>
+    {% endif %}
+
+    {% if project.project_difficulties %}
+    <section class="section about" id="project_difficulties">
+
+        <div class="text_container">
+            <div class="section_heading">
+                <h1>Project difficulties</h1>
+            </div>
+            <div class="content">
+                {{project.project_difficulties|safe}}
+            </div>
+        </div>
+
+        {% if project.project_difficulties_img %}
+            <div class="img_container">
+                <img src="/media/{{project.project_difficulties_img}}" alt="section image">
+                <img class="bg" src="/media/{{project.project_difficulties_img}}" alt="section image">
+            </div>
+        {% endif %}
+
+    </section>
+    {% endif %}
+
+    {% if project.solutions %}
+    <section class="section about" id="solutions">
+
+        <div class="text_container">
+            <div class="section_heading">
+                <h1>Solutions</h1>
+            </div>
+            <div class="content">
+                {{project.solutions|safe}}
+            </div>
+        </div>
+
+         {% if project.solutions_img %}
+            <div class="img_container">
+                <img src="/media/{{project.solutions_img}}" alt="section image">
+                <img class="bg" src="/media/{{project.solutions_img}}" alt="section image">
+            </div>
+        {% endif %}
+    </section>
+    {% endif %}
+
+    {% if project.features or project.technologies %}
+    <div class="parallax-window" id="skills" data-z-index="1" data-speed="0.2" data-parallax="scroll"
+        data-image-src="{% static 'base/images/forest.jpg' %}">
+
+        <section class="section" id="features">
+
+            <div class="container">
+                <div class="section_heading">
+                    <h1>Features</h1>
+                </div>
+                <div class="content">
+                    <div class="skills">
+
+                        <div class="skills_item">
+                            <h3>Technologies</h3>
+
+                             {% for skill in project.technologies %}
+
+                                    <p>{{skill.title|safe}}</p>
+                                    <ul>
+                                        {% for item in skill.items %}
+                                            {% if item %}
+                                            <li>{{item|safe}}</li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                    
+                                {% endfor %}
+
+                        </div>
+
+                        <div class="skills_item">
+                            <h3>Features</h3>
+                            
+                             {% for skill in project.features %}
+
+                                    <p>{{skill.title|safe}}</p>
+                                    <ul>
+                                        {% for item in skill.items %}
+                                            {% if item %}
+                                            <li>{{item|safe}}</li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                    
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+
+           
+
+                </div>
+
+            </div>
+        </section>
+    </div>
+    {% endif %}
+
+    <div class="container">
+        <div class="button_wrapper">
+            {% if previous_project_alias %}
+            <div class="button left"><a href="{% url 'project_details' previous_project_alias %}">Previous project</a></div>
+            {% endif %}
+
+            <div class="button center" ><a href="{% url 'home_page' %}#get_in_touch">Get in touch</a></div>
+
+            {% if next_project_alias %}
+                <div class="button right"><a href="{% url 'project_details' next_project_alias %}">Next project</a></div>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock content %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'base/styles/css/portfolio_item_page.min.css' %}">
+{% endblock styles %}

@@ -1,7 +1,9 @@
 from django.shortcuts import render, HttpResponse
 from .forms import ContactForm
-import json
 from django.template.defaultfilters import striptags
+from django.conf import settings
+import json
+import smtplib
 
 # Create your views here.
 
@@ -39,5 +41,22 @@ def manage_form(request, form, action=None):
 
 
 def send_email(data):
-    print("data")
-    print(data)
+
+    with smtplib.SMTP("smtp.gmail.com", 587) as smtp:
+        smtp.ehlo()
+        smtp.starttls()
+        smtp.ehlo()
+
+        USER_EMAIL = settings.USER_EMAIL
+        USER_PASS = settings.USER_PASS
+
+        smtp.login(USER_EMAIL, USER_PASS)
+
+        print(data, USER_EMAIL, USER_PASS)
+        subject = "Form submitted from your website"
+
+        body = "\n\n".join([key+": "+value for key, value in data.items()])
+
+        msg = "Subject: "+subject +"\n\n\n" + body
+
+        smtp.sendmail(USER_EMAIL, USER_EMAIL, msg)

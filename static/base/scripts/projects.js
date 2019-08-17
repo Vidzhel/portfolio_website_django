@@ -1,5 +1,17 @@
 window.addEventListener("DOMContentLoaded", function () {
 
+
+    // Get loaded projects and overall projects count
+    var projects_container = document.getElementById("projects");
+    var overall_projects_count = projects_container.dataset.projects_count;
+    var loaded_projects = (projects_container.getElementsByClassName("project_item")).length;
+
+    // Hide button if all projects are loaded
+    if (overall_projects_count - loaded_projects <= 0) {
+        var load_more_button = document.getElementById("load_more");
+        load_more_button.style.cssText = "visibility: hidden;";
+    }
+
     function create_projects(projects_info) {
         var projects_container = document.getElementsByClassName("projects");
 
@@ -16,6 +28,8 @@ window.addEventListener("DOMContentLoaded", function () {
 
             var container = document.createElement("div");
             container.classList.add("project_item");
+            container.classList.add("hidden");
+
             // container.classList.add("fade_in");
             if (element.in_progress)
                 container.classList.add("in_progress");
@@ -33,10 +47,10 @@ window.addEventListener("DOMContentLoaded", function () {
 
             project_item = '\
                     <div class="read_more">\
-                        <div class="button"><a href="' + element.absolute_url + '">Read more</a></div>\
+                        <div class="button"><a href="' + element.alias + '">Read more</a></div>\
                     </div>\
                     <img class="lazyload"\
-                        src="data:image/gif;base64,R0lGODlhCgAIAIABAN3d3f///yH5BAEAAAEALAAAAAAKAAgAAAINjAOnyJv2oJOrVXrzKQA7"\
+                        src="{% static "base/images/placeholder.jpg" %}"\
                         data-src="' + element.img + '" alt="project_image">\
                     <div class="project_item_content">\
                         <div class="title">' + element.title + '</div>\
@@ -46,7 +60,7 @@ window.addEventListener("DOMContentLoaded", function () {
                                 <div class="project_tags">' + tags_list + '</div>\
                             </div>\
                             <div class="right">\
-                                <a href="' + element.code_source + '" class="hoverable"><i class="fab fa-github-square fa-lg"></i></a>\
+                                <a rel="nofollow" href="' + element.code_source + '" class="hoverable"><i class="fab fa-github-square fa-lg"></i></a>\
                             </div>\
                         </div>\
                     </div>'
@@ -54,7 +68,27 @@ window.addEventListener("DOMContentLoaded", function () {
 
             container.innerHTML = project_item;
             $(".projects").append(container);
+
+            $(function () {
+                $(".hidden").animate({
+                    opacity: 1
+                }, {
+                    duration: 500,
+                    queue: false
+                });
+                $(".hidden").animate({
+                    "margin-top": "15px"
+                }, {
+                    duration: 500,
+                    specialEasing: {
+                        "margin-top": "easeOutCirc"
+                    },
+                    queue: false
+                });
+            });
+
             lazyload();
+
 
         });
 
@@ -69,6 +103,7 @@ window.addEventListener("DOMContentLoaded", function () {
     }
 
     // * Filter
+    var token = document.querySelector("[name='csrfmiddlewaretoken']");
 
     function sendFilterRequest(page = 0) {
         var section_nav = document.querySelector(".section_nav")
@@ -82,9 +117,10 @@ window.addEventListener("DOMContentLoaded", function () {
 
         $.ajax({
             url: "/portfolio/", // the endpoint
-            type: "GET", // http method
+            type: "POST", // http method
             dataType: "json",
             data: {
+                csrfmiddlewaretoken: token.getAttribute("value"),
                 page: page,
                 tags: JSON.stringify(tags),
                 category: JSON.stringify(category)
@@ -102,12 +138,15 @@ window.addEventListener("DOMContentLoaded", function () {
                     // Get loaded projects and overall projects count
                     var projects_container = document.getElementById("projects");
                     var overall_projects_count = (json[0])["projects_count"]
-                    projects_container.dataset = overall_projects_count
-                    var loaded_projects = (projects_container.getElementsByClassName("project_item")).length;
+                    projects_container.dataset.projects_count = overall_projects_count
+                    var loaded_projects = (projects_container.getElementsByClassName("project_item")).length + json.length;
 
                     if (overall_projects_count - loaded_projects > 0) {
                         var load_more_button = document.getElementById("load_more");
                         load_more_button.style.cssText = "";
+                    } else {
+                        var load_more_button = document.getElementById("load_more");
+                        load_more_button.style.cssText = "visibility: hidden;";
                     }
 
                 }
@@ -129,8 +168,6 @@ window.addEventListener("DOMContentLoaded", function () {
     var tags = document.getElementsByClassName("tag");
 
     function filterByTag(event) {
-        // Trigger click to smooth scroll to the top
-        (document.getElementsByClassName("projects")[0]).click();
 
         target = event.path[1];
         if (target.classList.contains("active")) {
@@ -185,7 +222,7 @@ window.addEventListener("DOMContentLoaded", function () {
         load_more_projects()
     }
 
-    var PAGINATION_PAGE_NUM = 5;
+    var PAGINATION_PAGE_NUM = 9;
 
     function load_more_projects() {
 

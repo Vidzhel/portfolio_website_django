@@ -13,6 +13,4 @@ def about(request):
 
     context = about_page.get_cleaned_data()
 
-    # print(context)
-
     return render(request, "about/about.html", context)

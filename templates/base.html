@@ -10,64 +10,69 @@
     <!-- Controls layout for wep pages on mobile browsers -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- Main meta tags -->
 
     <!-- Fav icons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'base/images/Logo.png' %}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'base/images/Logo.png' %}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'base/images/Logo.png' %}">
-    <link rel="shortcut icon" href="{% static 'base/images/Logo.png' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'base/images/Logo180x180.png' %}">
+    {% comment %} <link rel="icon" type="image/png" sizes="32x32" href="{% static 'base/images/Logo32x32.png' %}"> {% endcomment %}
+    <link rel="icon" type="image/png" sizes="72x72" href="{% static 'base/images/Logo72x72.png' %}">
+    <link rel="icon" type="image/png" sizes="180x180" href="{% static 'base/images/Logo180x180.png' %}" />
+    <link rel="shortcut icon" sizes="180x180" href="{% static 'base/images/Logo180x180.png' %}">
+    
     <meta name="robots" content="index,follow">
-
-    <link rel="manifest" href="">
-{% block meta %}
-    <!-- Main meta tags -->
-    <meta name="description" content="description of entire page. 90 characters">
-    <!-- Tell google that is the main page with content that may be duplicated on page provided with href -->
-    <link rel="canonical" href="page with similar content">
+    <meta name="description" content="Oleg Talaver - software engineer that also have skills in graphic design. Here you can find my portfolio as well as information about me. Each project contains explanations of my actions and thoughts, which you can easily navigate through. ">
     <title>Oleg Talaver</title>
 
     <!-- Open Graph meta tags for stilized links -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="TITLE OF YOUR POST OR PAGE">
-    <meta property="og:description" content="DESCRIPTION OF YOUR PAGE CONTENT">
-    <meta property="og:image" content="LINK TO THE IMAGE FILE">
-    <meta property="og:url" content="PERMALINK">
+    <meta property="og:title" content="Oleg Talaver - Portfolio Website">
+    <meta property="og:description" content="Oleg Talaver - software engineer that also have skills in graphic design. Here you can find my portfolio as well as information about me. Each project contains explanations of my actions and thoughts, which you can easily navigate through. ">
+    <meta property="og:image" content="{% static 'base/images/portfolio_header.png' %}">
+    <meta property="og:url" content="{% url 'home_page' %}">
     <meta property="og:site_name" content="SITE NAME">
+
     <!-- Twitter cards -->
-    <meta name="twitter:title" content="TITLE OF YOUR POST OR PAGE">
-    <meta name="twitter:description" content="DESCRIPTION OF YOUR PAGE CONTENT">
-    <meta name="twitter:image" content="LINK TO THE IMAGE FILE">
-    <meta name="twitter:site" content="@USERNAME">
-    <meta name="twitter:creator" content="@USERNAME">
+    <meta name="twitter:title" content="Oleg Talaver - Portfolio Website">
+    <meta name="twitter:description" content="Oleg Talaver - software engineer that also have skills in graphic design. Here you can find my portfolio as well as information about me. Each project contains explanations of my actions and thoughts, which you can easily navigate through. ">
+    <meta name="twitter:image" content="{% static 'base/images/portfolio_header.png' %}">
+    <meta name="twitter:site" content="@Vidzhel">
+    <meta name="twitter:creator" content="@Vidzhel">
+
+    <link rel="home" href="{% url 'home_page' %}">
+
+    <link rel="manifest" href="">
+{% block meta %}
+    <!-- Tell google that is the main page with content that may be duplicated on page provided with href -->
+    <link rel="canonical" href="{% url 'home_page' %}">
 {% endblock meta %}
 
     <!-- Mobile browser theme color -->
     <!-- Chrome, Firefox, Opera -->
-    <meta name="theme-color" content="#000">
+    <meta name="theme-color" content="#202125">
     <!-- Windows Phone -->
-    <meta name="msapplication-TileColor" content="#000">
-    <meta name="msapplication-navbutton-color" content="#000">
+    <meta name="msapplication-TileColor" content="#202125">
+    <meta name="msapplication-navbutton-color" content="#202125">
     <!-- IOS Safari -->
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucen">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <!-- Preloader -->
     <link rel="stylesheet" href="{% static 'base/styles/css/preloader.min.css' %}">
 
     <!-- Styles for preloading screen -->
     <style>
-        .preloader {
-            opacity: 0;
-            transition: opacity .2s ease-in-out;
-        }
+    .preloader {
+        opacity: 0;
+        transition: opacity .2s ease-in-out;
+    }
 
-        body {
-            opacity: 0;
-            overflow-x: hidden;
-        }
+    body {
+        opacity: 0;
+        overflow-x: hidden;
+    }
 
-        html {
-            background-color: #282C2F;
-        }
+    html {
+        background-color: #282C2F;
+    }
     </style>
 
 </head>
@@ -78,6 +83,7 @@
             <circle cx="50" cy="50" r="40" class="loader" />
         </svg>
     </div>
+
     {% block fixed_nav %}
     
     {% endblock fixed_nav %}
@@ -93,20 +99,18 @@
                 <a href="{% url 'home_page' %}">
                     <div class="logo">
 
-                        <img class="lazyload"
-                            src="data:image/gif;base64,R0lGODlhCgAIAIABAN3d3f///yH5BAEAAAEALAAAAAAKAAgAAAINjAOnyJv2oJOrVXrzKQA7"
-                            data-src="{% static 'base/images/Logo.png' %}" alt="vidzhel_logo">
+                        <img src="{% static 'base/images/Logo.png' %}">
                         <span class="logo_text">Vidzhel</span>
 
                     </div>
                 </a>
                 <div class="social_media">
-                    <a target="_blank" href="https://github.com/Vidzhel" class="hoverable"><i
+                    <a target="_blank" rel="nofollow" href="https://github.com/Vidzhel" class="hoverable"><i
                             class="fab fa-github-square fa-lg"></i></a>
-                    <a target="_blank" href="https://www.linkedin.com/in/vidzhel/" class="hoverable"><i
+                    <a target="_blank" rel="nofollow" href="https://www.linkedin.com/in/vidzhel/" class="hoverable"><i
                             class="fab fa-linkedin fa-lg"></i></a>
-                    <a target="_blank" href="https://www.pinterest.com/Vidzhel" class="hoverable"><i
-                            class="fab fa-pinterest-square fa-lg"></i></a>
+                    <a target="_blank" rel="nofollow" href="https://www.behance.net/vidzhel" class="hoverable"><i class="fab fa-behance-square fa-lg"></i></a>
+
                 </div>
             </div>
 

@@ -16,12 +16,12 @@
     margin-top: 10px
 
 // Common
-
 .animation
-    transition: all .4s ease-in-out !important
+    transition: all .5s ease-in-out !important
 
 .fade_in
     opacity: 0
+    // margin-top: 50px
     transform: translate(0, 100px)
 
 body
@@ -44,6 +44,9 @@ a
 
 textarea
     resize: none
+
+.parallax-window
+    background-image: linear-gradient(black, black)
 
 .parallax-window 
 	min-height: 100%
@@ -149,7 +152,7 @@ textarea
 
     
     .button_wrapper
-        margin-top: 20px
+        margin-top: 55px
         display: flex
         justify-content: center
 
@@ -162,7 +165,7 @@ textarea
         font-size: 13px
         text-transform: uppercase
         color: $accentColor
-        font-weight: 300
+        font-weight: 500
         letter-spacing: 5px
         margin: 0 0 10px 0
 
@@ -202,6 +205,18 @@ textarea
             &:last-child
                 margin: 0
 
+    
+.logo_link
+    padding: 5px 0
+    display: flex
+
+.logo
+        z-index: 3
+        display: flex
+        align-items: center
+        font-family: $lato
+        font-weight: 300
+        font-size: 20px
 
 .fixed_nav
     position: fixed
@@ -211,14 +226,6 @@ textarea
     left: 0
     z-index: 100
     transition: padding .4s ease-in-out, background .4s ease-in-out, box-shadow .1s ease-in-out
-
-    .logo
-        z-index: 3
-        display: flex
-        align-items: center
-        font-family: $lato
-        font-weight: 300
-        font-size: 20px
 
     .main_nav
         position: static
@@ -317,7 +324,7 @@ textarea
     transition: transform .2s ease-in-out, box-shadow .2s ease-in-out
 
     .read_more
-        height: 172px
+        height: 270px
         top: 0
         left: 0
         position: absolute
@@ -329,6 +336,7 @@ textarea
         opacity: 0
         transition: opacity .2s ease-in-out
 
+        
     img
         display: block
         width: 100%
@@ -366,20 +374,30 @@ textarea
         .read_more
             opacity: 1
 
+.hidden
+    opacity: 0
+    margin-top: 55px
+
 .project_tags
+    width: auto
     display: flex
-    justify-content: space-around
+    margin-right: 15px
+    flex-direction: row
+    flex-flow: wrap
+    justify-content: center
 
 .tag
-    margin: 0 5px
+    margin: 3px 5px
+    display: flex
+    align-items: center
 
     a
         // display: block
         text-transform: uppercase
         background-color: #fff
         border-radius: 15px
-        padding: 5px 12px
-        font-size: 11px
+        padding: 5px 10px
+        font-size: 9px
         transition: background-color .2s ease-in-out, border .2s ease-in-out
         color: $primaryBGColor
         line-height: 1

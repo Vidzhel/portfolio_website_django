@@ -1,35 +1,41 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, get_object_or_404
 from .models import ProjectItem, Tag, Category
 from django.core.serializers.json import DjangoJSONEncoder
 import json
 import operator
 
-PAGINATION_PAGE_NUM = 5
+PAGINATION_PAGE_NUM = 9
 
 # Create your views here.
 
+
 def filter_projects(request, is_json=False):
+    """Gets request flag if data is in json forman
+
+    Receive data from GET method and than regarding to the parematers
+    searches and returns projects
+    """
 
     # Try to get tags and category form the GET request
     if(is_json):
         tags_regex = ""
         category = "all"
 
-        if(request.GET.get("tags", "") != ""):
-            tags = json.loads(request.GET.get("tags", ""))
+        if(request.POST.get("tags", "") != ""):
+            tags = json.loads(request.POST.get("tags", ""))
             tags_regex = "^(" + \
                 "|".join(tags) + ")$"
-        
-        if(request.GET.get("category", "") != ""):
-            category = json.loads(request.GET.get("category", ""))
+
+        if(request.POST.get("category", "") != ""):
+            category = json.loads(request.POST.get("category", ""))
     else:
-        tags = request.GET.get("tags", "")
+        tags = request.POST.get("tags", "")
         tags_regex = "^(" + tags + ")$"
-        category = request.GET.get("category", "all")
-    
+        category = request.POST.get("category", "all")
+
     # Num of page (for pagination)
-    page = int( request.GET.get("page", "0"))
-    
+    page = int(request.POST.get("page", "0"))
+
     # Get centain objects from db
     if(category.lower() == "all" and len(tags) == 0):
         projects = ProjectItem.objects.all().distinct()
@@ -46,20 +52,23 @@ def filter_projects(request, is_json=False):
     # Return set of unique projects regarding to the page, activated tags,
     #  categoires and overall count of projects
     # First project included, last excluded
-    first_project = PAGINATION_PAGE_NUM * page 
+    first_project = PAGINATION_PAGE_NUM * page
     last_project = PAGINATION_PAGE_NUM + page * PAGINATION_PAGE_NUM
-    print(projects)
     return (projects[first_project:last_project], tags, category, len(projects))
 
 
 def projects(request, filtered=""):
 
-    if(filtered.lower() == "filtered" and request.GET):
+    # If "filtered" than it's redirection from "home" page and
+    # you need to load certain projects rather than all
+    if(filtered.lower() == "filtered" and request.POST):
         filtered_data = filter_projects(request)
         filtered_projects = filtered_data[0]
-        activated_tag = Tag.objects.filter(name__iexact="".join(filtered_data[1]))
-        activated_category = Tag.objects.filter(name__iexact="".join(filtered_data[2]))
-        
+        activated_tag = Tag.objects.filter(
+            name__iexact="".join(filtered_data[1]))
+        activated_category = Tag.objects.filter(
+            name__iexact="".join(filtered_data[2]))
+
         categories = Category.objects.all()
         tags = Tag.objects.all()
 
@@ -74,10 +83,11 @@ def projects(request, filtered=""):
 
         return render(request, "projects/portfolio.html", context)
 
-
     # Response to the client filter request
-    elif(request.GET):
-            
+    # occurs when you click on a tag or category
+    # on the "portfolio" page
+    elif(request.POST):
+
         # Prepare project to send them back
         projects_data = []
         filtered_data = filter_projects(request, True)
@@ -88,7 +98,7 @@ def projects(request, filtered=""):
 
             info = {
                 "title": project.title,
-                "absolute_url": project.get_absolute_url(),
+                "alias": project.get_absolute_url(),
                 "img": "/media/" + str(project.img),
                 "description": project.description,
                 "tags": list(project.tags.all().values_list("name")),
@@ -113,3 +123,30 @@ def projects(request, filtered=""):
     }
 
     return render(request, "projects/portfolio.html", context)
+
+
+def project_details(request, alias):
+    """Search in db for a particular project and return all info about it
+
+    alias - primary key
+    """
+
+    project = get_object_or_404(ProjectItem, pk=alias)
+    projects = ProjectItem.objects.all()
+
+    previous_project_alias =""
+    next_project_alias = ""
+    for i in range(len(projects)):
+        if(projects[i].alias == alias):
+            if(i > 0):
+                previous_project_alias = projects[i-1].alias
+            if(i < len(projects) - 1):
+                next_project_alias = projects[i+1].alias
+    print(previous_project_alias, next_project_alias)
+    context = {
+        "project": project.get_cleaned_data(),
+        "previous_project_alias": previous_project_alias,
+        "next_project_alias": next_project_alias,
+    }
+
+    return render(request, "projects/portfolio_item.html", context)

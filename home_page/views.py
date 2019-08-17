@@ -19,7 +19,7 @@ def home_page(request):
         about_page = (About.objects.all())[0]
         about = about_page.get_cleaned_data()
     except:
-        pass
+        about = {}
 
     # Check if it form redirection and send response
     if(request.method == "POST"):

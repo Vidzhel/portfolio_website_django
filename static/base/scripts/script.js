@@ -18,21 +18,27 @@ window.onload = function () {
         // sort if necessary
         if (elements.length > 1)
             return (Array.prototype.slice.call(elements)).sort(y_offset_comparer);
+
         return elements
 
     }
 
-    var animate_on_bottom_offset = 300;
+    var animate_on_bottom_offset = 200;
 
     function fade_in(elements) {
         if (elements === null || elements == undefined || elements.length == 0)
             return;
+
         var screenBottom = window.pageYOffset + Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-        while ((elements[elements.length - 1].offsetTop + animate_on_bottom_offset) <= screenBottom) {
-            if (elements.length > 1)
-                var element_to_animate = elements.pop();
-            else
+
+        while (elements.length !== 0 && (elements[elements.length - 1].offsetTop + animate_on_bottom_offset) <= screenBottom) {
+            if (elements.length == 1) {
                 var element_to_animate = elements[0];
+                element_to_animate.classList.add("animation");
+                element_to_animate.classList.remove("fade_in");
+                break;
+            } else
+                var element_to_animate = elements.pop();
 
             element_to_animate.classList.add("animation");
             element_to_animate.classList.remove("fade_in");
@@ -41,7 +47,7 @@ window.onload = function () {
         return elements
     }
 
-    fade_in(get_fade_in_elements());
+    // fade_in(get_fade_in_elements());
 
     // *Preloader
     var preloader = (document.getElementsByClassName("preloader"))[0];
@@ -211,129 +217,4 @@ window.onload = function () {
         });
 
     }
-
-    // *Carousel animation
-
-    var carousel_container = document.getElementsByClassName("carousel");
-
-    function animate_carousel(slides, next_slide = null) {
-        if (next_slide === null) {
-
-            next_slide = 0;
-
-            for (var i = 0; i < slides.length; i++) {
-                if (slides[i].classList.contains("active"))
-                    if (i + 1 < slides.length)
-                        next_slide = i + 1;
-                    else
-                        next_slide = 0;
-
-            }
-        }
-
-        for (var item of slides)
-            if (item.classList.contains("passive"))
-                item.classList.remove("passive");
-
-        var change = false;
-        for (var y = 0; i < slides.length; i++) {
-            var item = slides[y];
-            if (item.classList.contains("active") && !change) {
-                slides[next_slide].classList.add("active");
-                item.classList.add("passive");
-                item.classList.remove("active");
-                change = true;
-            }
-        }
-
-    }
-
-    // Set interval
-    if (carousel_container !== null) {
-
-        Array.prototype.forEach.call(carousel_container, element => {
-            var carousel_items = element.getElementsByClassName("carousel_item");
-
-            if (carousel_items !== null) {
-                var slide_time = 0;
-
-                if (element.dataset.slide_time === undefined)
-                    slide_time = 6000;
-                else
-                    slide_time = element.dataset.slide_time;
-
-                // Get set interval id and set it as data attr
-                var id = setInterval(function () {
-                    animate_carousel(carousel_items)
-                }, slide_time);
-                element.setAttribute("data-set_interval_id", id);
-            }
-        });
-
-    }
-
-    // Slide controll
-    var slide_controlls = document.getElementsByClassName("slide_controll");
-
-    Array.prototype.forEach.call(slide_controlls, element => {
-        // findAncestor(slide)
-        var carousel = element.closest(".carousel");
-        var slides = carousel.getElementsByClassName("carousel_item");
-
-        if (slides === null || carousel == null)
-            new Error("wrong carousel_item location");
-
-        // Which button has pressed
-        var is_next_slide_controll = element.classList.contains("right");
-        element.onclick = function () {
-
-            clearInterval(carousel.dataset.set_interval_id);
-            if (is_next_slide_controll)
-                animate_carousel(slides);
-            else {
-
-                for (var i = 0; i < slides.length; i++)
-                    if (slides[i].classList.contains("active")) {
-                        var previous_slide_id = i - 1
-                        break;
-                    }
-
-                if (previous_slide_id === undefined) {
-                    if (element.dataset.slide_time === undefined)
-                        slide_time = 6000;
-                    else
-                        slide_time = element.dataset.slide_time;
-
-
-                    // Get set interval id and set it as data attr
-                    var id = setInterval(function () {
-                        animate_carousel(slides)
-                    }, slide_time);
-                    carousel.setAttribute("data-set_interval_id", id);
-                    return;
-                }
-
-                if (previous_slide_id < 0)
-                    previous_slide_id = slides.length - 1
-                else if (previous_slide_id >= slides.length)
-                    previous_slide_id = 0
-
-                animate_carousel(slides, previous_slide_id);
-            }
-
-            if (element.dataset.slide_time === undefined)
-                slide_time = 6000;
-            else
-                slide_time = element.dataset.slide_time;
-
-
-            // Get set interval id and set it as data attr
-            var id = setInterval(function () {
-                animate_carousel(slides)
-            }, slide_time);
-            carousel.setAttribute("data-set_interval_id", id);
-        };
-    });
-
-
 }

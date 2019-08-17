@@ -1,21 +1,21 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% comment %} {% block meta %}
-{% endblock meta %} {% endcomment %}
+{% block meta %}
+    <!-- Tell google that is the main page with content that may be duplicated on page provided with href -->
+    <link rel="canonical" href="{% url 'projects_list' %}">
+{% endblock meta %}
 
 {% block fixed_nav %}
 
         <div class="nav_wrapper">
             <div class="fixed_nav">
                 <div class="anim_inner outher_container">
-                    <a href="{% url 'home_page' %}">
+                    <a class="logo_link" href="{% url 'home_page' %}">
 
                         <div class="logo">
 
-                            <img class="lazyload"
-                                src="data:image/gif;base64,R0lGODlhCgAIAIABAN3d3f///yH5BAEAAAEALAAAAAAKAAgAAAINjAOnyJv2oJOrVXrzKQA7"
-                                data-src="{% static 'base/images/Logo.png' %}" alt="vidzhel_logo">
+                            <img src="{% static 'base/images/Logo.png' %}" alt="vidzhel_logo">
                             <span class="logo_text">Vidzhel</span>
 
                         </div>
@@ -26,7 +26,7 @@
                             <div class="list">
                                 <ul>
                                     <li><a href="{% url 'home_page' %}">HOME</a></li>
-                                    <li class="active"><a href="">PORTFOLIO</a></li>
+                                    <li class="active"><a href="{% url 'projects_list' %}">PORTFOLIO</a></li>
                                     <li><a href="{% url 'about' %}">ABOUT</a></li>
                                     <li><a href="{% url 'home_page' %}#get_in_touch">CONTACT</a></li>
                                 </ul>
@@ -56,12 +56,11 @@
             </div>
 
             <div class="social_media">
-                <a target="_blank" href="https://github.com/Vidzhel" class="hoverable"><i
+                <a target="_blank" rel="nofollow" href="https://github.com/Vidzhel" class="hoverable"><i
                         class="fab fa-github-square fa-lg"></i></a>
-                <a target="_blank" href="https://www.linkedin.com/in/vidzhel/" class="hoverable"><i
+                <a target="_blank" rel="nofollow" href="https://www.linkedin.com/in/vidzhel/" class="hoverable"><i
                         class="fab fa-linkedin fa-lg"></i></a>
-                <a target="_blank" href="https://www.pinterest.com/Vidzhel" class="hoverable"><i
-                        class="fab fa-pinterest-square fa-lg"></i></a>
+                <a target="_blank" rel="nofollow" href="https://www.behance.net/vidzhel" class="hoverable"><i class="fab fa-behance-square fa-lg"></i></a>
             </div>
 
         </div>
@@ -90,16 +89,18 @@
 <section class="section" style="min-height: 380px">
     <div class="container">
 
-        <div id="projects" class="projects smooth_scroll" data-anchor="projects" data-duration="500" data-projects_count="{{projects_count}}">
+        <div id="projects" class="projects" data-projects_count="{{projects_count}}">
             {% for project in projects %}
                     
-                    <div class="project_item {% if project.in_progress %} in_progress {% endif %}">
+                    <div class="project_item fade_in {% if project.in_progress %} in_progress {% endif %}">
                         <div class="read_more">
-                            <div class="button"><a href="{% url 'home_page' %}">Read more</a></div>
+                            <div class="button"><a href="{% url 'project_details' project.alias %}">Read more</a></div>
                         </div>
-                        <img class="lazyload"
-                            src="data:image/gif;base64,R0lGODlhCgAIAIABAN3d3f///yH5BAEAAAEALAAAAAAKAAgAAAINjAOnyJv2oJOrVXrzKQA7"
-                            data-src="/media/{{project.img}}" alt="project_image">
+                        <img
+                            class="lazyload"
+                            src="{% static 'base/images/placeholder.jpg' %}"
+                            data-src="/media/{{project.img}}" alt="project_image"
+                            >
                         <div class="project_item_content">
                             <div class="title">{{project.title}}</div>
                             <div class="summary">{{project.description}}</div>
@@ -107,12 +108,12 @@
                                 <div class="left">
                                     <div class="project_tags">
                                         {% for tag in project.tags.all  %}
-                                            <div class="tag {% if tag.name == activated_tag.0.name %}active{% endif %}"><a href="#">{{tag.name}}</a></div>
+                                            <div class="tag {% if tag.name == activated_tag.0.name %}active{% endif %}"><a>{{tag.name}}</a></div>
                                         {% endfor %}
                                     </div>
                                 </div>
                                 <div class="right">
-                                    <a href="{{project.code_source}}" class="hoverable"><i class="fab fa-github-square fa-lg"></i></a>
+                                    <a href="{{project.code_source}}" rel="nofollow" class="hoverable"><i class="fab fa-github-square fa-lg"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -120,12 +121,17 @@
 
                     {% endfor %}
         </div>
-        <div class="button_wrapper">
-            <div class="button" id="load_more"><a>Load more</a></div>
-        </div>
+
+        {% if projects %}
+            <div class="button_wrapper">
+                <div class="button" id="load_more"><a>Load more</a></div>
+            </div>
+        {% endif %}
     </div>
 
 </section>
+
+{% csrf_token %}
 
 {% endblock content %}
 

@@ -1,21 +1,21 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% comment %} {% block meta %}
-{% endblock meta %} {% endcomment %}
+{% block meta %}
+    <!-- Tell google that is the main page with content that may be duplicated on page provided with href -->
+    <link rel="canonical" href="{% url 'about' %}">
+{% endblock meta %}
 
 {% block fixed_nav %}
 
         <div class="nav_wrapper">
             <div class="fixed_nav">
                 <div class="anim_inner outher_container">
-                    <a href="{% url 'home_page' %}">
+                    <a class="logo_link" href="{% url 'home_page' %}">
 
                         <div class="logo">
 
-                            <img class="lazyload"
-                                src="data:image/gif;base64,R0lGODlhCgAIAIABAN3d3f///yH5BAEAAAEALAAAAAAKAAgAAAINjAOnyJv2oJOrVXrzKQA7"
-                                data-src="{% static 'base/images/Logo.png' %}" alt="vidzhel_logo">
+                            <img src="{% static 'base/images/Logo.png' %}" alt="vidzhel_logo">
                             <span class="logo_text">Vidzhel</span>
 
                         </div>
@@ -50,17 +50,16 @@
                     <h1>ABOUT ME</h1>
                     <h2>To shine your brightest light is to be who you truly are.
                     </h2>
-                    <div class="button"><a href="../index.html#get_in_touch">Get in touch</a></div>
-                    <div class="button"><a href="#">Download CV</a></div>
+                    <div class="button"><a href="{% url 'home_page' %}#get_in_touch">Get in touch</a></div>
+                    <div class="button"><a rel="nofollow" href="#">Get Resume</a></div>
                 </div>
 
                 <div class="social_media">
-                    <a target="_blank" href="https://github.com/Vidzhel" class="hoverable"><i
+                    <a target="_blank" rel="nofollow" href="https://github.com/Vidzhel" class="hoverable"><i
                             class="fab fa-github-square fa-lg"></i></a>
-                    <a target="_blank" href="https://www.linkedin.com/in/vidzhel/" class="hoverable"><i
+                    <a target="_blank" rel="nofollow" href="https://www.linkedin.com/in/vidzhel/" class="hoverable"><i
                             class="fab fa-linkedin fa-lg"></i></a>
-                    <a target="_blank" href="https://www.pinterest.com/Vidzhel" class="hoverable"><i
-                            class="fab fa-pinterest-square fa-lg"></i></a>
+                    <a target="_blank" rel="nofollow" href="https://www.behance.net/vidzhel" class="hoverable"><i class="fab fa-behance-square fa-lg"></i></a>
                 </div>
 
             </div>
@@ -141,9 +140,6 @@
                 <div class="container">
                     <div class="section_heading">
                         <h1>skills</h1>
-                        <h2>Skill and confidence are an
-                            unconquered army.
-                        </h2>
                     </div>
                     <div class="content">
                         <div class="skills">
