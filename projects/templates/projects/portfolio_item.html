@@ -52,7 +52,7 @@
                     <h2>
                         {{project.title}}
                     </h2>
-                    <div class="button"><a rel="nofollow" href="{{project.code_source}}">code source</a></div>
+                    <div class="button"><a rel="nofollow" href="{{project.code_source}}" target="_blank">code source</a></div>
                 </div>
 
                 <div class="social_media">
@@ -109,11 +109,12 @@
             </div>
         </div>
         {% if project.about_img %}
-
-        <div class="img_container">
-            <img src="/media/{{project.about_img}}" alt="section image">
-            <img class="bg" src="/media/{{project.about_img}}" alt="section image">
-        </div>
+            <div class="img_container">
+                <a href="/media/{{project.about_img}}" target="_blank">
+                    <img src="/media/{{project.about_img}}" alt="section image">
+                    {% comment %} <img class="bg" src="/media/{{project.about_img}}" alt="section image"> {% endcomment %}
+                </a>
+            </div>
         {% endif %}
 
     </section>
@@ -133,8 +134,11 @@
 
         {% if project.project_difficulties_img %}
             <div class="img_container">
-                <img src="/media/{{project.project_difficulties_img}}" alt="section image">
-                <img class="bg" src="/media/{{project.project_difficulties_img}}" alt="section image">
+                <a href="/media/{{project.project_difficulties_img}}" target="_blank">
+                    <img src="/media/{{project.project_difficulties_img}}" alt="section image">
+                    {% comment %} <img class="bg" src="/media/{{project.project_difficulties_img}}" alt="section image"> {% endcomment %}
+                </a>
+
             </div>
         {% endif %}
 
@@ -154,10 +158,12 @@
         </div>
 
          {% if project.solutions_img %}
-            <div class="img_container">
-                <img src="/media/{{project.solutions_img}}" alt="section image">
-                <img class="bg" src="/media/{{project.solutions_img}}" alt="section image">
-            </div>
+                <div class="img_container">
+                    <a href="/media/{{project.solutions_img}}" target="_blank">
+                        <img src="/media/{{project.solutions_img}}" alt="section image">
+                        {% comment %} <img class="bg" src="/media/{{project.solutions_img}}" alt="section image"> {% endcomment %}
+                    </a>
+                </div>
         {% endif %}
     </section>
     {% endif %}

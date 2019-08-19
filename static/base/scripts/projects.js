@@ -60,7 +60,7 @@ window.addEventListener("DOMContentLoaded", function () {
                                 <div class="project_tags">' + tags_list + '</div>\
                             </div>\
                             <div class="right">\
-                                <a rel="nofollow" href="' + element.code_source + '" class="hoverable"><i class="fab fa-github-square fa-lg"></i></a>\
+                                <a rel="nofollow" href="' + element.code_source + '" class="hoverable" target="_blank"><i class="fab fa-github-square fa-lg"></i></a>\
                             </div>\
                         </div>\
                     </div>'

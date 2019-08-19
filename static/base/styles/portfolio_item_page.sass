@@ -3,6 +3,8 @@
 .categories ul
     margin: 0
 
+section
+	color: #D7D7D7
 
 .container .button_wrapper.button_wrapper
 	margin: 35px 0
@@ -21,27 +23,28 @@ section
 	.img_container
 		overflow: hidden
 		margin-top: 20px
-		height: 500px
+		display: flex
+		justify-content: center
+		// height: 750px
 		position: relative
 
 	img
-		width: 70%
-		margin: 0 auto
-		left: 50%
-		transform: translateX(-50%)
-		bottom: 0
-		position: absolute
+		max-width: 100%
+		// margin: 0 auto
+		// left: 50%
+		// transform: translateX(-50%)
+		// bottom: 0
+		// position: absolute
 		z-index: 1
 		display: block
-		height: 100%
 		object-fit: cover
 
-.bg
-	width: 100%
-	z-index: 0
-	filter: blur(8px)
-	opacity: 0.2
-	transform: scale(1.2), translateX(0)
+// .bg
+// 	width: 100%
+// 	z-index: 0
+// 	filter: blur(8px)
+// 	opacity: 0.2
+// 	transform: scale(1.2), translateX(0)
 
 // About
 
@@ -71,8 +74,6 @@ section
 			color: $accentColor
 
 @media screen and (max-width: 400px)
-	.img_container.img_container
-		height: 150px !important
 
 	.carousel .content
 		height: 60vw !important
@@ -90,9 +91,6 @@ section
         font-size: 10px !important
 
 @media screen and (max-width: 768px)
-
-	.img_container.img_container
-		height: 300px
 
 	section img
 		width: 100%

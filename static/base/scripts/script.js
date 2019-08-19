@@ -47,7 +47,7 @@ window.onload = function () {
         return elements
     }
 
-    // fade_in(get_fade_in_elements());
+    fade_in(get_fade_in_elements());
 
     // *Preloader
     var preloader = (document.getElementsByClassName("preloader"))[0];

@@ -71,16 +71,20 @@
             <div class="categories">
                 <ul>
                     <li><a class="smooth_scroll" data-anchor="about" data-duration="1000">ABOUT</a></li>
-                    {% if education %}
-                        <li><a class="smooth_scroll" data-anchor="education" data-duration="1300">EDUCATION</a></li>
-                    {% endif %}
-                    {% if developer_skills or designer_skills %}
-                    <li><a class="smooth_scroll" data-anchor="skills" data-duration="1500">SKILLS</a></li>
-                    {% endif %}
+                    
                     {% if work_experience %}
                     <li><a class="smooth_scroll" data-anchor="work_experience" data-duration="1700">WORK EXPERIENCE</a>
                     </li>
                     {% endif %}
+                    
+                    {% if developer_skills or designer_skills %}
+                    <li><a class="smooth_scroll" data-anchor="skills" data-duration="1500">SKILLS</a></li>
+                    {% endif %}
+
+                    {% if education %}
+                        <li><a class="smooth_scroll" data-anchor="education" data-duration="1300">EDUCATION</a></li>
+                    {% endif %}
+
                     {% if honors %}
                     <li><a class="smooth_scroll" data-anchor="honors" data-duration="2000">HONORS</a></li>
                     {% endif %}
@@ -109,22 +113,24 @@
 
     </section>
 
-    {% if education %}
-        <section class="section education" id="education">
+    {% if work_experience  %}
+        <section class="section education " id="work_experience">
 
             <div class="text_container fade_in">
                 <div class="section_heading">
-                    <h1>EDUCATION</h1>
+                    <h1>Work EXPERIENCE</h1>
                 </div>
                 <div class="content">
 
-                    {% for education_item in education %}
+                    {% for item in work_experience %}
                         <div class="education_item">
-                            <h3>{{education_item.title|safe}}</h3>
-                            <span>{{education_item.years|safe}}</span>
-                            {{education_item.text|safe}}
+                            <h3>{{item.title|safe}}</h3>
+                            <span>{{item.years|safe}}</span>
+                            {{item.text|safe}}
                         </div>
                     {% endfor %}
+
+                </div>
 
             </div>
 
@@ -190,24 +196,22 @@
         </div>
     {% endif %}
 
-    {% if work_experience  %}
-        <section class="section education " id="work_experience">
+    {% if education %}
+        <section class="section education" id="education">
 
             <div class="text_container fade_in">
                 <div class="section_heading">
-                    <h1>Work EXPERIENCE</h1>
+                    <h1>EDUCATION</h1>
                 </div>
                 <div class="content">
 
-                    {% for item in work_experience %}
+                    {% for education_item in education %}
                         <div class="education_item">
-                            <h3>{{item.title|safe}}</h3>
-                            <span>{{item.years|safe}}</span>
-                            {{item.text|safe}}
+                            <h3>{{education_item.title|safe}}</h3>
+                            <span>{{education_item.years|safe}}</span>
+                            {{education_item.text|safe}}
                         </div>
                     {% endfor %}
-
-                </div>
 
             </div>
 

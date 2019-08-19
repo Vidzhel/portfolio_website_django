@@ -61,7 +61,8 @@ def projects(request, filtered=""):
 
     # If "filtered" than it's redirection from "home" page and
     # you need to load certain projects rather than all
-    if(filtered.lower() == "filtered" and request.POST):
+    if(filtered.lower() == "filtered" and request.GET):
+        request.POST = request.GET
         filtered_data = filter_projects(request)
         filtered_projects = filtered_data[0]
         activated_tag = Tag.objects.filter(
@@ -80,7 +81,7 @@ def projects(request, filtered=""):
             "projects": filtered_projects,
             "projects_count": filtered_data[3]
         }
-
+        # print(activated_tag)
         return render(request, "projects/portfolio.html", context)
 
     # Response to the client filter request
