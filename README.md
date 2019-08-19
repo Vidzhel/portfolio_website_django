@@ -17,6 +17,10 @@ This is a Python-based website powered by the Django framework. The main purpose
 - Using SASS/SCSS;
 - Improved Web Design skills;
 
+
+<p align="center"><a href="https://i.ibb.co/5rMvgDV/portfolio-website-django.jpg"><img src="https://i.ibb.co/5rMvgDV/portfolio-website-django.jpg" width="700" alt="header of the home page"/></a></p>
+<p align="center" style="text-align:center; margin:-=0">Database tables diagram</p>
+
 ## Getting Started
 To copy the project open bash, go to the folder where you would like to store files and write:
 ```
