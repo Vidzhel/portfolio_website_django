@@ -1,5 +1,5 @@
-# Reply - Messenger
-This is a Python-based website powered by the Django framework. The main purpose of the site is to provide me with a place where I can store my portfolio, some additional information about me, CV.
+# Portfolio website
+This was my previous Python-based website powered by the Django framework. The main purpose of the site was to provide me with a place where I can store my portfolio, some additional information about me, CV.
 
 
 <p align="center"><a href="https://i.ibb.co/Db517Rr/Oleg-Talaver-Google-Chrome-17-08-2019-12-24-35-2.png"><img src="https://i.ibb.co/Db517Rr/Oleg-Talaver-Google-Chrome-17-08-2019-12-24-35-2.png" width="700" alt="header of the home page"/></a></p>
